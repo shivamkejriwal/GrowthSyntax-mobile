@@ -7,5 +7,35 @@
 </ion-header>
 
 <ion-content padding>
-
+    <ion-card>
+      <ion-card-header>
+        Message from the developers.
+      </ion-card-header>
+      <ion-card-content>
+        Hey there user. Thank you for using GrowthSyntax. This app is still in beta 
+        but there are tons more features and fuctionlity on the way. Please be paitent.
+      </ion-card-content>
+    </ion-card>
+    <ion-card>
+        <ion-card-header>
+            Feedback
+        </ion-card-header>
+        <ion-list>
+          <ion-item>
+            <ion-label color="primary" stacked>Satisfaction</ion-label>
+            <ion-range min="-5" max="5" snaps="true" pin="true" [(ngModel)]="satisfaction">
+                <ion-icon range-left small name="thumbs-down"></ion-icon>
+                <ion-icon range-right small name="thumbs-up"></ion-icon>
+            </ion-range>
+          </ion-item>
+          <ion-item>
+              <ion-label color="primary" stacked>Comments</ion-label>
+              <ion-textarea placeholder="This is great. Please continue development."></ion-textarea>
+            </ion-item>
+          <ion-item>
+              <button ion-button round large>Submit</button>
+          </ion-item>
+        </ion-list>
+    </ion-card>
+    
 </ion-content>
