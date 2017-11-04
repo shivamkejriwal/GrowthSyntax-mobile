@@ -53,7 +53,6 @@ export class HomePage {
       profile: {},
       prices: {}
     };
-    // this.events.publish('company:reset');
   }
 
   private userProfileReceived = (data) => {
@@ -116,6 +115,7 @@ export class HomePage {
 
   private loadCompany = (ticker) => {
     console.log(`loadCompany - ${ticker}`);
+    this.events.publish('company:reset');
     this.company.ticker = ticker;
 
     // let count = 0;

@@ -30,6 +30,10 @@ export class ManagementSection {
   }
 
   reset() {
+    if (!this) {
+      return;
+    }
+
     this.ticker = '';
     this.company = {
       fundamentals: [],

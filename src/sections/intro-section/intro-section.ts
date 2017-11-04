@@ -30,6 +30,10 @@ export class IntroSection {
   }
 
   reset() {
+    if (!this) {
+      return;
+    }
+    
     this.ticker = '';
     this.company = {
       fundamentals: [],

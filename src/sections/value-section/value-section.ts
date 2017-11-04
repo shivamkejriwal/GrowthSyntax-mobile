@@ -30,6 +30,10 @@ export class ValueSection {
   }
 
   reset() {
+    if (!this) {
+      return;
+    }
+
     this.ticker = '';
     this.company = {
       fundamentals: [],

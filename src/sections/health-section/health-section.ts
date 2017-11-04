@@ -29,6 +29,10 @@ export class HealthSection {
   }
 
   reset() {
+    if (!this) {
+      return;
+    }
+    
     this.ticker = '';
     this.company = {
       fundamentals: [],
