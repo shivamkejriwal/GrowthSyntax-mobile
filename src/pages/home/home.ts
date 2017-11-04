@@ -4,25 +4,45 @@ import { NavController, MenuController, Events } from 'ionic-angular';
 
 import { AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firestore';
 
+const getDocument = (db: AngularFirestore, loc, callback, done) => {
+  const document = db.doc<any>(loc);
+  const dataFeed = document.valueChanges();
+  if (!done) {
+    dataFeed.subscribe(data => callback(data))
+  }
+  else {
+    dataFeed.subscribe(data => callback(data, done))
+  }
+   
+};
+
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
 export class HomePage {
   user: any;
+  company: any;
 
   constructor(public navCtrl: NavController
             , public menuCtrl: MenuController
             , public events: Events
-            , afs: AngularFirestore) {
+            , private afs: AngularFirestore) {
+    
+    this.reset();
+    const userID = '000';
+    getDocument(afs, `Users/${userID}`, this.userProfileReceived, '');
+  }
+
+  reset() {
     this.user = {
       watchlist: []
     };
-    
-    const userID = '000';
-    const document = afs.doc<any>(`Users/${userID}`);
-    const userData = document.valueChanges();
-    userData.subscribe(data => this.userProfileReceived(data))
+    this.company = {
+      fundamentals: {},
+      profile: {},
+      prices: {}
+    };
   }
 
   private userProfileReceived = (data) => {
@@ -46,9 +66,33 @@ export class HomePage {
     });
   }
 
-  loadCompany(ticker) {
-    console.log(`loadCompany - ${ticker}`);
+  private companyProfileReceived = (data, done) => {
+    console.log('companyProfileReceived', data);
+    this.company.profile = data;
+    done();
+  }
 
+  private companyPricesReceived = (data, done) => {
+    console.log('companyPricesReceived', data);
+    this.company.prices = data;
+    done();
+  }
+
+  private loadCompany = (ticker) => {
+    console.log(`loadCompany - ${ticker}`);
+    this.company.ticker = ticker;
+
+    let count = 0;
+    const done = () => {
+      count++;
+      console.log(`loadCompany-done : ${count}`);
+      if (count > 1) {
+        this.events.publish('company', this.company);
+      }
+    }
+
+    getDocument(this.afs, `Companies/${ticker}/Profile/Data`, this.companyProfileReceived, done);
+    getDocument(this.afs, `Companies/${ticker}/Prices/closing-price`, this.companyPricesReceived, done);
   }
 
 }
