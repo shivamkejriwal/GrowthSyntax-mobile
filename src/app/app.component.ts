@@ -12,6 +12,8 @@ import { TabsPage } from '../pages/tabs/tabs';
 export class MyApp {
   rootPage:any = TabsPage;
   sideMenu:any;
+  tickerList:Array<any> = []
+  searchItems:Array<any> = []
 
   constructor(platform: Platform
           , public events: Events
@@ -27,7 +29,27 @@ export class MyApp {
     this.setupMenu();
   }
 
+  getSearchItems(event) {
+    console.log('getSearchItems', event);
+    const val = event.target.value;
+    if (val && val.trim() != '') {
+      this.searchItems = this.tickerList.filter((item) => {
+        return (item.toLowerCase().indexOf(val.toLowerCase()) > -1);
+      });
+    }
+    if (!val) {
+      this.searchItems = [];
+    }
+  }
+
   private setupMenu = () => {
+    this.tickerList = [
+      'HBI',
+      'VFC',
+      'WFC',
+      'NKE',
+      'GOOGL'
+    ];
     this.sideMenu = {
       title : 'Side Menu',
       items : []

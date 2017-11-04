@@ -1,13 +1,25 @@
 <ion-menu [content]="mycontent">
     <ion-header>
         <ion-toolbar>
-            <ion-title>{{sideMenu.title}}</ion-title>
+            <!-- <ion-title></ion-title> -->
+            <!-- <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar> -->
         </ion-toolbar>
     </ion-header>
     <ion-content>
-        <ion-list>
-            <ion-item menuClose *ngFor="let item of sideMenu.items" (click)="item.onclick(item.name)">{{item.name}}</ion-item>
-        </ion-list>
+        <ion-searchbar (ionInput)="getSearchItems($event)"></ion-searchbar>
+        <ion-item-group>
+            <div *ngIf="searchItems[0]">
+                    <ion-item-divider color="light">Results</ion-item-divider>
+                    <ion-item *ngFor="let item of searchItems">
+                        {{ item }}
+                    </ion-item>
+            </div>
+                
+            <ion-item-divider color="light">{{sideMenu.title}}</ion-item-divider>
+            <ion-list>
+                <ion-item menuClose *ngFor="let item of sideMenu.items" (click)="item.onclick(item.name)">{{item.name}}</ion-item>
+            </ion-list>
+        </ion-item-group>
     </ion-content>
 </ion-menu>
 
