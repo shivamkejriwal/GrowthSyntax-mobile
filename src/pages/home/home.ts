@@ -44,15 +44,20 @@ export class HomePage {
     getDocument(afs, `Users/${userID}`, this.userProfileReceived, '');
   }
 
-  reset() {
-    this.user = {
-      watchlist: []
-    };
+  resetCompany() {
     this.company = {
       fundamentals: [],
       profile: {},
       prices: {}
     };
+    this.events.publish('company:reset');
+  }
+
+  reset() {
+    this.user = {
+      watchlist: []
+    };
+    this.resetCompany();
   }
 
   private userProfileReceived = (data) => {
@@ -115,7 +120,9 @@ export class HomePage {
 
   private loadCompany = (ticker) => {
     console.log(`loadCompany - ${ticker}`);
-    this.events.publish('company:reset');
+    if (ticker !== this.company.ticker) {
+      this.resetCompany();
+    }
     this.company.ticker = ticker;
 
     // let count = 0;
