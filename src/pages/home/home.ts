@@ -2,19 +2,29 @@ import { Component } from '@angular/core';
 import { NavController, MenuController, Events } from 'ionic-angular';
 
 
-import { AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firestore';
+import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection } from 'angularfire2/firestore';
 
-const getDocument = (db: AngularFirestore, loc, callback, done) => {
-  const document = db.doc<any>(loc);
-  const dataFeed = document.valueChanges();
+
+const feedComplete = (dataFeed, callback, done) => {
   if (!done) {
     dataFeed.subscribe(data => callback(data))
   }
   else {
     dataFeed.subscribe(data => callback(data, done))
   }
-   
+}
+
+const getDocument = (db: AngularFirestore, loc, callback, done) => {
+  const document = db.doc<any>(loc);
+  const dataFeed = document.valueChanges();
+  return feedComplete(dataFeed, callback, done);
 };
+
+const getCollection = (db: AngularFirestore,loc, callback, done) => {
+  const collection = db.collection<any>(loc);
+  const dataFeed = collection.valueChanges();
+  return feedComplete(dataFeed, callback, done);
+}
 
 @Component({
   selector: 'page-home',
@@ -39,10 +49,11 @@ export class HomePage {
       watchlist: []
     };
     this.company = {
-      fundamentals: {},
+      fundamentals: [],
       profile: {},
       prices: {}
     };
+    // this.events.publish('company:reset');
   }
 
   private userProfileReceived = (data) => {
@@ -69,6 +80,7 @@ export class HomePage {
   private companyProfileReceived = (data, done) => {
     console.log('companyProfileReceived', data);
     this.company.profile = data;
+    this.events.publish('company', this.company);
     if (!done) {
       this.events.publish('company', this.company);
     }
@@ -80,6 +92,20 @@ export class HomePage {
   private companyPricesReceived = (data, done) => {
     console.log('companyPricesReceived', data);
     this.company.prices = data;
+    this.events.publish('company', this.company);
+    if (!done) {
+      this.events.publish('company', this.company);
+    }
+    else {
+      done();
+    }
+  }
+
+  private companyFundamentalsReceived = (data, done) => {
+    console.log('companyFundamentalsReceived', data);
+    data.sort((a, b) => a.date > b.date);
+    this.company.fundamentals = data;
+    this.events.publish('company', this.company);
     if (!done) {
       this.events.publish('company', this.company);
     }
@@ -103,6 +129,7 @@ export class HomePage {
 
     getDocument(this.afs, `Companies/${ticker}/Profile/Data`, this.companyProfileReceived, '');
     getDocument(this.afs, `Companies/${ticker}/Prices/closing-price`, this.companyPricesReceived, '');
+    getCollection(this.afs, `Fundamentals/${ticker}/Annual`, this.companyFundamentalsReceived, '');
   }
 
 }
