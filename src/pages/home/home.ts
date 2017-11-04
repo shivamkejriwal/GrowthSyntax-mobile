@@ -69,30 +69,40 @@ export class HomePage {
   private companyProfileReceived = (data, done) => {
     console.log('companyProfileReceived', data);
     this.company.profile = data;
-    done();
+    if (!done) {
+      this.events.publish('company', this.company);
+    }
+    else {
+      done();
+    }
   }
 
   private companyPricesReceived = (data, done) => {
     console.log('companyPricesReceived', data);
     this.company.prices = data;
-    done();
+    if (!done) {
+      this.events.publish('company', this.company);
+    }
+    else {
+      done();
+    }
   }
 
   private loadCompany = (ticker) => {
     console.log(`loadCompany - ${ticker}`);
     this.company.ticker = ticker;
 
-    let count = 0;
-    const done = () => {
-      count++;
-      console.log(`loadCompany-done : ${count}`);
-      if (count > 1) {
-        this.events.publish('company', this.company);
-      }
-    }
+    // let count = 0;
+    // const done = () => {
+    //   count++;
+    //   console.log(`loadCompany-done : ${count}`);
+    //   if (count > 1) {
+    //     this.events.publish('company', this.company);
+    //   }
+    // }
 
-    getDocument(this.afs, `Companies/${ticker}/Profile/Data`, this.companyProfileReceived, done);
-    getDocument(this.afs, `Companies/${ticker}/Prices/closing-price`, this.companyPricesReceived, done);
+    getDocument(this.afs, `Companies/${ticker}/Profile/Data`, this.companyProfileReceived, '');
+    getDocument(this.afs, `Companies/${ticker}/Prices/closing-price`, this.companyPricesReceived, '');
   }
 
 }
