@@ -46,21 +46,23 @@ export class HealthSection {
             {
                 label: 'Debt',
                 data: debt,
-                // fill: false,
-                backgroundColor: 'rgba(191, 113, 84, .8)'
+                fill: false,
+                backgroundColor: 'rgba(191, 113, 84, 1)',
+                borderColor: 'rgba(191, 113, 84, 1)'
             },
             {
                 label: 'Net Worth',
                 data: equity,
-                // fill: false,
-                backgroundColor: 'rgba(126, 158, 123, 1)'
+                fill: false,
+                backgroundColor: 'rgba(126, 158, 123, 1)',
+                borderColor: 'rgba(126, 158, 123, 1)'
             }
 
         ]
     };
     var options = {
         responsive: true,
-        maintainAspectRatio: false,
+        maintainAspectRatio: true,
         legend: {
             display: true,
             position: 'bottom',
