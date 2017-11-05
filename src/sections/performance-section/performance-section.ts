@@ -68,6 +68,9 @@ export class PerformanceSection {
         title: {
             display: false
         },
+        animation: {
+          duration: 0
+        },
         scales: {
             xAxes: [
                 {

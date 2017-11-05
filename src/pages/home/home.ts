@@ -84,7 +84,6 @@ export class HomePage {
   private companyProfileReceived = (data, done) => {
     console.log('companyProfileReceived', data);
     this.company.profile = data;
-    this.events.publish('company', this.company);
     if (!done) {
       this.events.publish('company', this.company);
     }
@@ -96,7 +95,6 @@ export class HomePage {
   private companyPricesReceived = (data, done) => {
     console.log('companyPricesReceived', data);
     this.company.prices = data;
-    this.events.publish('company', this.company);
     if (!done) {
       this.events.publish('company', this.company);
     }
@@ -109,7 +107,6 @@ export class HomePage {
     console.log('companyFundamentalsReceived', data);
     data.sort((a, b) => a.date > b.date);
     this.company.fundamentals = data;
-    this.events.publish('company', this.company);
     if (!done) {
       this.events.publish('company', this.company);
     }
