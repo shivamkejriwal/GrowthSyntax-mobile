@@ -18,7 +18,11 @@ const combinedOperation = (eleA, eleB, op) => {
 }
 
 const getLastObject = (list) => {
-    return (list.length > 0) ? list[list.length - 1] : {};
+    return (list && list.length > 0) ? list[list.length - 1] : {};
+};
+
+const getSecondLastObject = (list) => {
+    return (list && list.length > 1) ? list[list.length - 2] : {};
 };
 
 const round = (value, precision) => {
@@ -40,6 +44,7 @@ const median = (array) => {
 const Utils = {
     reduce,
     getLastObject,
+    getSecondLastObject,
     round,
     divide,
     average,

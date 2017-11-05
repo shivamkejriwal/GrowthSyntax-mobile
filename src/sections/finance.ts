@@ -92,9 +92,9 @@ const growthRates = (list) => {
 };
 
 const evaluteCurrentCashFlow = (fundamentals) => {
-    const list = fundamentals.list;
+    const list = fundamentals;
     const currentData = Utils.getLastObject(list);
-    const prevData = list[list.length - 2];
+    const prevData = Utils.getSecondLastObject(list);
     const currentWorkingCapital = currentData.ASSETSC - currentData.LIABILITIESC;
     const previousWorkingCapital = prevData.ASSETSC - prevData.LIABILITIESC;
     const currentValue = currentWorkingCapital
@@ -106,7 +106,7 @@ const evaluteCurrentCashFlow = (fundamentals) => {
 
 
 const forcastedCashFromRevenue = (fundamentals, timeFrame, estimatedGrowthRate) => {
-    const list = fundamentals.list;
+    const list = fundamentals;
     const revenueOverTime = Utils.reduce(list, 'REVENUE', (val) => val);
     const fcfOverTime = Utils.reduce(list, 'FCF', (val) => val);
     const ratios = Utils.combinedOperation(fcfOverTime, revenueOverTime, (a,b) => Utils.divide(a,b));
@@ -132,7 +132,7 @@ const forcastedCashFromRevenue = (fundamentals, timeFrame, estimatedGrowthRate) 
 };
 
 const forcastedCashFromDividend = (fundamentals, timeFrame, estimatedGrowthRate) => {
-    const list = fundamentals.list;
+    const list = fundamentals;
     const dividendPerShareOverTime = Utils.reduce(list, 'DPS', (val) => val);
     const sharesOverTime = Utils.reduce(list, 'SHARESWA', (val) => val);
     const dividendOverTime = Utils.combinedOperation(dividendPerShareOverTime, sharesOverTime, (a,b) => a * b);
@@ -162,7 +162,7 @@ const forcastedCashFromDividend = (fundamentals, timeFrame, estimatedGrowthRate)
 };
 
 const evaluateFutureCashFlow = (profile, fundamentals, estimatedGrowthRate, timeFrame) => {
-    const list = fundamentals.list;
+    const list = fundamentals;
     const sector = profile.sector;
     // const sector = 'Financial';
 
@@ -190,7 +190,7 @@ const getPresentValue = (discountRate, futureCashFlow, timeFrame) => {
 }
 
 const getFairValue = (fundamentals, presentValues, presentTerminalValue) => {
-    const list = fundamentals.list;
+    const list = fundamentals;
     const currentData = Utils.getLastObject(list);
     const sharesOutstanding = currentData.SHARESWA;
     const obligations = currentData.LIABILITIESNC || 0;

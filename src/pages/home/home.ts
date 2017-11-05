@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, MenuController, Events } from 'ionic-angular';
 
 
-import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection } from 'angularfire2/firestore';
+import { AngularFirestore } from 'angularfire2/firestore';
 
 
 const feedComplete = (dataFeed, callback, done) => {

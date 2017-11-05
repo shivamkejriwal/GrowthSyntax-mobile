@@ -1,4 +1,28 @@
 <ion-card>
     <ion-card-header>Value</ion-card-header>
-    <ion-card-content>Something</ion-card-content>
+    <ion-card-content>
+            <div *ngIf="!company.profile.ticker">
+                    Somthing
+                </div>
+            <div *ngIf="company.profile.ticker">
+                <div  class="chart-container">
+                    <canvas id="valueChart"></canvas>
+                </div>
+            </div>
+            <ion-row no-padding>
+                <ion-col>
+                    <button ion-button clear small color="danger" icon-start>
+                        <ion-icon name='paper'></ion-icon>
+                        More Details
+                    </button>
+                </ion-col>
+                <ion-col text-center></ion-col>
+                <ion-col text-right>
+                    <button ion-button clear small color="danger" icon-start>
+                        <ion-icon name='share-alt'></ion-icon>
+                        Share
+                    </button>
+                </ion-col>
+            </ion-row>
+    </ion-card-content>
 </ion-card>
