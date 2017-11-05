@@ -1,7 +1,17 @@
-<ion-card>
+<ion-card id="management">
     <ion-card-header>Management</ion-card-header>
     <ion-card-content>
-        Something
+        <div *ngIf="!company.profile.ticker">
+                Somthing
+            </div>
+        <div *ngIf="company.profile.ticker">
+            <div  class="chart-container">
+                <canvas id="growthAllocationTimeline"></canvas>
+            </div>
+        </div>
+
+        <!-- Card Footer -->
+        <!-- =========== -->
         <ion-row no-padding>
             <ion-col>
                 <button ion-button clear small color="danger" icon-start>
