@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Events } from 'ionic-angular';
 import Chart from 'chart.js';
+import { Utils } from '../utils';
 
 
 @Component({
@@ -9,6 +10,7 @@ import Chart from 'chart.js';
 })
 export class PerformanceSection {
   company:any;
+  currentData: any = {};
   charts: Array<any> = [];
   ticker: string = '';
   
@@ -26,7 +28,77 @@ export class PerformanceSection {
                           && data.fundamentals.length > 0);
     if(dataComplete) {
       console.log('PerformanceSection-dataComplete', data);
+      const list = this.company.fundamentals || [];
+      this.currentData = Utils.getLastObject(list);
+      this.buildEarningsChart();
     }
+  }
+
+  buildEarningsChart() {
+    var ctx = document.getElementById("earningsChart");
+    const list = this.company.fundamentals;
+    const years = Utils.reduce(list, 'date', (val) => val.split('-')[0]);
+    const revenue = Utils.reduce(list, 'REVENUE',(val) => val);
+    const netIncome = Utils.reduce(list, 'NETINC', (val) => val);
+    var data = {
+        labels: years,
+        datasets: [
+            {
+                label: 'Earnings',
+                data: netIncome,
+                // fill: false,
+                backgroundColor: 'rgba(249, 201, 117, 1)'
+            },
+            {
+                label: 'Revenue',
+                data: revenue,
+                // fill: false,
+                backgroundColor: 'rgba(126, 158, 123, 1)'
+            }
+
+        ]
+    };
+    var options = {
+        responsive: true,
+        maintainAspectRatio: true,
+        legend: {
+            display: true,
+            position: 'bottom',
+        },
+        title: {
+            display: false
+        },
+        scales: {
+            xAxes: [
+                {
+                    gridLines: {
+                        display:false
+                    },
+                    ticks: {
+                        display: true,
+                        beginAtZero: true
+                    }
+                }
+            ],
+            yAxes: [
+                {
+                    gridLines: {
+                        drawBorder: false,
+                        display:false
+                    },
+                    ticks: {
+                        display: false
+                    }
+                }
+            ]
+        }
+    };
+    var chart = new Chart(ctx, {
+        type: 'line',
+        data,
+        options
+    });
+    this.charts.push(chart);
   }
 
   reset() {

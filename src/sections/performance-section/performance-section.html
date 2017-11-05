@@ -1,7 +1,15 @@
 <ion-card>
     <ion-card-header>Performance</ion-card-header>
     <ion-card-content>
-        Something
+        <div *ngIf="!company.profile.ticker">
+                Somthing
+            </div>
+        <div *ngIf="company.profile.ticker">
+            <div  class="chart-container">
+                <canvas id="earningsChart"></canvas>
+            </div>
+        </div>
+        
         <!-- Card Footer -->
         <!-- =========== -->
         <ion-row no-padding>
