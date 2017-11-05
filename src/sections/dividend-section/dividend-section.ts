@@ -24,7 +24,8 @@ export class DividendSection {
     const dataComplete = Boolean(data.profile.ticker
                           && data.prices.ticker
                           && data.fundamentals.length > 0);
-    if(dataComplete) {
+    const tickerMismatch = Boolean(this.ticker !== data.profile.ticker);
+    if(dataComplete && tickerMismatch) {
       console.log('DividendSection-dataComplete', data);
     }
   }

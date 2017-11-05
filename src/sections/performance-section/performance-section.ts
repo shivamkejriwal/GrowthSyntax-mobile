@@ -26,11 +26,13 @@ export class PerformanceSection {
     const dataComplete = Boolean(data.profile.ticker
                           && data.prices.ticker
                           && data.fundamentals.length > 0);
-    if(dataComplete) {
-      console.log('PerformanceSection-dataComplete', data);
-      const list = this.company.fundamentals || [];
-      this.currentData = Utils.getLastObject(list);
-      this.buildEarningsChart();
+    const tickerMismatch = Boolean(this.ticker !== data.profile.ticker);
+    if(dataComplete && tickerMismatch) {
+        this.ticker = this.company.profile.ticker;
+        console.log('PerformanceSection-dataComplete', data);
+        const list = this.company.fundamentals || [];
+        this.currentData = Utils.getLastObject(list);
+        this.buildEarningsChart();
     }
   }
 

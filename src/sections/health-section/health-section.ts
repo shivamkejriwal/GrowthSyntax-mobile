@@ -25,11 +25,13 @@ export class HealthSection {
     const dataComplete = Boolean(data.profile.ticker
                           && data.prices.ticker
                           && data.fundamentals.length > 0);
-    if(dataComplete) {
-      console.log('HealthSection-dataComplete', data);
-      const list = this.company.fundamentals || [];
-      this.currentData = Utils.getLastObject(list);
-      this.buildNetWorthChart();
+    const tickerMismatch = Boolean(this.ticker !== data.profile.ticker);
+    if(dataComplete && tickerMismatch) {
+        this.ticker = this.company.profile.ticker;
+        console.log('HealthSection-dataComplete', data);
+        const list = this.company.fundamentals || [];
+        this.currentData = Utils.getLastObject(list);
+        this.buildNetWorthChart();
     }
   }
 
