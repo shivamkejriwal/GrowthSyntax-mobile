@@ -41,15 +41,106 @@ const median = (array) => {
     const median = (array[lowMiddle] + array[highMiddle]) / 2;
     return median;
 }
+
+const standardDeviation = (array: Array<any>) => {
+    const avg = average(array);
+
+    const squareDiffs = array.map((value) => {
+        var diff = value - avg;
+        var sqrDiff = diff * diff;
+        return sqrDiff;
+    });
+
+    const avgSquareDiff = average(squareDiffs);
+
+    const stdDev = Math.sqrt(avgSquareDiff);
+    return stdDev;
+}
+
+const isMonotone = (array) => {
+    return array.every((ele, i, list) => { 
+        if (i) return ele > list[i-1]; 
+        else return true; 
+    });
+}
+
+const monotoneCheck = (array) => {
+    let count = 0;
+    array.forEach((ele, i, list) => { 
+        if(i && ele > list[i-1]) {
+            count++;
+        }
+        if(!i && ele){
+            count ++;
+        }
+    });
+    return count;
+}
+
+const change = (array:Array<number>, isRelative) => {
+    const change = [];
+    array.forEach((ele, i, arr) => {
+        if (i){
+            const prev = arr[i-1];
+            const absDiff = Math.abs(ele - prev);
+            const relativeDiff = divide(absDiff, prev) * 100;
+            const value = isRelative ? relativeDiff : absDiff;
+            change.push(value);
+        }
+    });
+    return change;
+}
+
+const cleanSeries = (array: Array<any>) => {
+    const series = [];
+    let total = 0;
+    array.forEach((ele,i) => {
+        total = total + ele; 
+        if (total) {
+            series.push(ele);
+        }
+    });
+    return series;
+}
+
+const volatility = (array: Array<any>) => {
+    const std = Utils.standardDeviation(array) || 0;
+    const ave = Utils.average(array) || 1;
+    const volatility = Math.abs(std-ave)/ave;
+    console.log('buildVolatility', {
+        array,
+        std, 
+        ave,
+        volatility
+    });
+    return volatility;
+}
+
+const weightedAverage = (array, rawWeights) => {
+    const total = rawWeights.reduce((sum, value) => sum + value);
+    const weights = rawWeights.map(x => x/total);
+    const weightedValues = combinedOperation(array, weights, (a,b)=> a*b);
+    console.log('div-weightedAverage',{array, weights,total, weightedValues});
+    return weightedValues.reduce((sum, value) => sum + value);
+    
+}
+
 const Utils = {
     reduce,
     getLastObject,
     getSecondLastObject,
     round,
     divide,
+    weightedAverage,
     average,
     median,
-    combinedOperation
+    isMonotone,
+    monotoneCheck,
+    change,
+    volatility,
+    standardDeviation,
+    combinedOperation,
+    cleanSeries
 };
 
 export { Utils };

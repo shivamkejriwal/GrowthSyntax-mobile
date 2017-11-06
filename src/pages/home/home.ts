@@ -105,7 +105,7 @@ export class HomePage {
 
   private companyFundamentalsReceived = (data, done) => {
     console.log('companyFundamentalsReceived', data);
-    data.sort((a, b) => a.date > b.date);
+    // data.sort((a, b) => a.date > b.date);
     this.company.fundamentals = data;
     if (!done) {
       this.events.publish('company', this.company);

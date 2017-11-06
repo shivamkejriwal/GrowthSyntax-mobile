@@ -1,7 +1,14 @@
 <ion-card>
     <ion-card-header>Dividend</ion-card-header>
     <ion-card-content>
-        Something
+        <div *ngIf="!company.profile.ticker">
+                Somthing
+            </div>
+        <div *ngIf="company.profile.ticker">
+            <div  class="chart-container">
+                <canvas id="dpsChart"></canvas>
+            </div>
+        </div>
 
         <!-- Card Footer -->
         <!-- =========== -->
