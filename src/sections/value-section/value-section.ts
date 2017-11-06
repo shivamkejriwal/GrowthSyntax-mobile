@@ -248,6 +248,11 @@ export class ValueSection {
       prices: {}
     };
     this.charts.forEach(chart => {
+        // chart.data.labels.pop();
+        // chart.data.datasets.forEach((dataset) => {
+        //     dataset.data.pop();
+        // });
+        // chart.update();
         chart.destroy();
     });
   }
