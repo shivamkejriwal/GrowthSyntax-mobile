@@ -59,18 +59,25 @@ export class DividendSection {
     const volatility = Utils.volatility(change);
 
     const safetyList = [acceptablePayoutRatio, currentRatio, cfoToDividend, debtToEquity, retainedEarningsIncreases];
-    // this.analysis.safety = Utils.weightedAverage(safetyList, [3, 3, 2, 2, 1]);
-    this.analysis.safety = Utils.average(safetyList);
-    this.analysis.dividendHistory = cleanDps.length/years;
-    this.analysis.increasingDividends = dividendIncreases/years; 
-    this.analysis.stability = 1 - volatility;
+    const safety = Utils.weightedAverage(safetyList, [3, 3, 2, 2, 1]);
+    // this.analysis.safety = Utils.average(safetyList);
+    const dividendHistory = cleanDps.length/years;
+    const increasingDividends = dividendIncreases/years;
+    const stability = ((1 - volatility) < 0) ? 0 : 1 - volatility;
 
-    this.analysis.score = Utils.average([
-        this.analysis.safety,
-        this.analysis.stability,
-        this.analysis.increasingDividends,
-        this.analysis.dividendHistory
+    const score = Utils.average([
+        safety,
+        stability,
+        increasingDividends,
+        dividendHistory
     ]);
+    this.analysis.score = Utils.round(score, 1) * 10;
+    this.analysis.increasingDividends = Utils.round(increasingDividends, 1) * 10;
+    this.analysis.safety = Utils.round(safety, 1) * 10;
+    this.analysis.stability = Utils.round(stability, 1) * 10;
+    this.analysis.dividendHistory = Utils.round(dividendHistory, 1) * 10;
+    this.analysis.DIVYIELD = Utils.round(this.currentData.DIVYIELD * 100, 2);
+    
     console.log('buildDiv', {
         dividendIncreases, retainedEarningsIncreases,
         safetyList,

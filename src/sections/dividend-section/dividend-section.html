@@ -8,6 +8,33 @@
             <div  class="chart-container">
                 <canvas id="dpsChart"></canvas>
             </div>
+            <ion-list>
+                <ion-list-header>
+                    <ion-col>Score</ion-col>
+                    <ion-badge color="light" item-end>{{analysis.score}}</ion-badge>
+                </ion-list-header>
+                <ion-item>
+                    <ion-col>Safety</ion-col>
+                    <ion-badge color="light" item-end>{{analysis.safety}}</ion-badge>
+                </ion-item>
+                <ion-item>
+                    <ion-col>Dividend History</ion-col>
+                    <ion-badge color="light" item-end>{{analysis.dividendHistory}}</ion-badge>
+                </ion-item>
+                <ion-item>
+                    <ion-col>Increasing Dividends</ion-col>
+                    <ion-badge color="light" item-end>{{analysis.increasingDividends}}</ion-badge>
+                </ion-item>
+                <ion-item>
+                    <ion-col>Stability</ion-col>
+                    <ion-badge color="light" item-end>{{analysis.stability}}</ion-badge>
+                </ion-item>
+                <ion-item>
+                    <ion-col>Dividend Yield</ion-col>
+                    <ion-badge color="light" item-end>{{analysis.DIVYIELD}}%</ion-badge>
+                </ion-item>
+            </ion-list>
+            
         </div>
 
         <!-- Card Footer -->
