@@ -5,6 +5,31 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { TabsPage } from '../pages/tabs/tabs';
 
+import { AngularFirestore } from 'angularfire2/firestore';
+import { Observable } from 'rxjs';
+
+const getCollection = (db:AngularFirestore, queryString:string, limit: numer) => {
+  const qs = queryString.toUpperCase();
+  const nextChar = (c) => String.fromCharCode(c.charCodeAt(0) + 1);
+  const incrementString = (str) => {
+    const lastChar = queryString.slice(-1);
+    const beg = queryString.slice(0, -1);
+    return `${beg}${nextChar(lastChar)}`
+  };
+
+  const queryByTicker = db.collection<any>('Companies', ref => { 
+      return ref.where('ticker', '>=', qs)
+              .where('ticker','<' , incrementString(qs))
+              .limit(limit);
+    }).valueChanges();
+  const queryByName = db.collection<any>('Companies', ref => { 
+    return ref.where('name', '>=', qs)
+            .where('name','<' , incrementString(qs))
+            .limit(limit);
+  }).valueChanges();
+
+  return Observable.merge(queryByTicker, queryByName);
+}
 
 @Component({
   templateUrl: 'app.html'
@@ -12,13 +37,13 @@ import { TabsPage } from '../pages/tabs/tabs';
 export class MyApp {
   rootPage:any = TabsPage;
   sideMenu:any;
-  tickerList:Array<any> = []
   searchItems:Array<any> = []
 
   constructor(platform: Platform
           , public events: Events
           , statusBar: StatusBar
-          , splashScreen: SplashScreen) {
+          , splashScreen: SplashScreen
+          , private afs: AngularFirestore) {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
@@ -32,9 +57,10 @@ export class MyApp {
   getSearchItems(event) {
     console.log('getSearchItems', event);
     const val = event.target.value;
+    this.searchItems = [];
     if (val && val.trim() != '') {
-      this.searchItems = this.tickerList.filter((item) => {
-        return (item.toLowerCase().indexOf(val.toLowerCase()) > -1);
+      getCollection(this.afs, val, 3).subscribe(queriedItems => {
+        queriedItems.forEach(item => this.searchItems.push(item));
       });
     }
     if (!val) {
@@ -43,13 +69,6 @@ export class MyApp {
   }
 
   private setupMenu = () => {
-    this.tickerList = [
-      'HBI',
-      'VFC',
-      'WFC',
-      'NKE',
-      'GOOGL'
-    ];
     this.sideMenu = {
       title : 'Side Menu',
       items : []
