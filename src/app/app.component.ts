@@ -6,7 +6,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { TabsPage } from '../pages/tabs/tabs';
 
 import { AngularFirestore } from 'angularfire2/firestore';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 
 const getCollection = (db:AngularFirestore, queryString:string, limit: number) => {
   const qs = queryString.toUpperCase();
@@ -37,7 +37,8 @@ const getCollection = (db:AngularFirestore, queryString:string, limit: number) =
 export class MyApp {
   rootPage:any = TabsPage;
   sideMenu:any;
-  searchItems:Array<any> = []
+  searchItems:Array<any> = [];
+  searchSubscription: Subscription;
 
   constructor(platform: Platform
           , public events: Events
@@ -54,14 +55,28 @@ export class MyApp {
     this.setupMenu();
   }
 
+  clearSearch() {
+    this.searchItems = [];
+    if (this.searchSubscription) {
+      this.searchSubscription.unsubscribe();
+    }
+  }
+
   getSearchItems(event) {
     console.log('getSearchItems', event);
     const val = event.target.value;
-    this.searchItems = [];
+    this.clearSearch();
+
+    const fill = (queriedItems) => queriedItems.forEach(item => {
+      const exists = this.searchItems.some(ele => ele.ticker === item.ticker);
+      if(!exists) {
+        this.searchItems.push(item);
+      }
+    });
+    
     if (val && val.trim() != '') {
-      getCollection(this.afs, val, 3).subscribe(queriedItems => {
-        queriedItems.forEach(item => this.searchItems.push(item));
-      });
+      const query = getCollection(this.afs, val, 2).subscribe(fill);
+      this.searchSubscription = query;
     }
   }
 
