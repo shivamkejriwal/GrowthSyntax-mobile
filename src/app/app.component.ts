@@ -8,7 +8,7 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { Observable } from 'rxjs';
 
-const getCollection = (db:AngularFirestore, queryString:string, limit: numer) => {
+const getCollection = (db:AngularFirestore, queryString:string, limit: number) => {
   const qs = queryString.toUpperCase();
   const nextChar = (c) => String.fromCharCode(c.charCodeAt(0) + 1);
   const incrementString = (str) => {
@@ -62,9 +62,6 @@ export class MyApp {
       getCollection(this.afs, val, 3).subscribe(queriedItems => {
         queriedItems.forEach(item => this.searchItems.push(item));
       });
-    }
-    if (!val) {
-      this.searchItems = [];
     }
   }
 
