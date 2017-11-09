@@ -16,4 +16,22 @@
       <management-section></management-section>
       <dividend-section></dividend-section>
   </div>
+
+  <div [hidden]="company.ticker">
+    <ion-item-group>
+        <ion-item-divider color="light">Daily Updates</ion-item-divider>
+        <ion-list>
+          <ion-item *ngFor="let article of articles.updates">
+              {{article.title}}
+          </ion-item>
+        </ion-list>
+        <ion-item-divider color="light">Stock Highlights</ion-item-divider>
+        <ion-list>
+          <ion-item *ngFor="let article of articles.highlights">
+              {{article.title}}
+          </ion-item>
+        </ion-list>
+    </ion-item-group>
+      
+  </div>
 </ion-content>
