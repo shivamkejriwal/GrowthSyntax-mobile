@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, MenuController, Events } from 'ionic-angular';
-
+import { ArticlePage } from '../article/article';
 
 import { AngularFirestore } from 'angularfire2/firestore';
 
@@ -167,6 +167,11 @@ export class HomePage {
       item.title = title;
       this.articles.highlights.push(item);
     }));
+  }
+
+  showArticle(article) {
+    console.log('article',article);
+    this.navCtrl.push(ArticlePage, {article});
   }
 
 }

@@ -1,0 +1,21 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>
+        Article
+        </ion-title>
+    </ion-navbar>
+</ion-header>
+  
+  <ion-content>
+      <ion-card-header>{{article.title}}</ion-card-header>
+      <ion-card-content>
+        <ion-row>
+            <ion-col class="originalContent">Original content on</ion-col> 
+            <ion-col right><button ion-button small outline (click)="goToOriginalContent()">{{article.author}}</button></ion-col>
+        </ion-row>
+        
+          {{article.content}}
+          <!-- <ion-item>{{article.content}}</ion-item> -->
+          
+        </ion-card-content>
+  </ion-content>

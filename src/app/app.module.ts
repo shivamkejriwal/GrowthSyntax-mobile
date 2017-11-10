@@ -1,11 +1,14 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserTab } from '@ionic-native/browser-tab';
+
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 
 import { AboutPage } from '../pages/about/about';
 import { GuidePage } from '../pages/guide/guide';
 import { HomePage } from '../pages/home/home';
+import { ArticlePage } from '../pages/article/article';
 import { TabsPage } from '../pages/tabs/tabs';
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -41,6 +44,7 @@ var firebaseConfig = {
     AboutPage,
     GuidePage,
     HomePage,
+    ArticlePage,
     TabsPage,
     ValueSection,
     HealthSection,
@@ -64,11 +68,13 @@ var firebaseConfig = {
     AboutPage,
     GuidePage,
     HomePage,
+    ArticlePage,
     TabsPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
+    BrowserTab,
     Firebase,
     AngularFireDatabase,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
