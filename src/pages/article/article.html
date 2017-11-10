@@ -13,8 +13,8 @@
             <ion-col class="originalContent">Original content on</ion-col> 
             <ion-col right><button ion-button small outline (click)="goToOriginalContent()">{{article.author}}</button></ion-col>
         </ion-row>
-        
-          {{article.content}}
+        <div [innerHTML]="article.content"></div>
+          <!-- {{article.content}} -->
           <!-- <ion-item>{{article.content}}</ion-item> -->
           
         </ion-card-content>

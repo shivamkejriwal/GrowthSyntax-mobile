@@ -16,8 +16,9 @@ export class ArticlePage {
     console.log('ArticlePage', this.article);
   }
 
-  goToOriginalContent() {
-    const url = this.article.url;
+  goToOriginalContent(link) {
+    const url = link ? link : this.article.url;
+    console.log('goToOriginalContent',{url});
     const isMac = this.platform.is('ios');
     const desktop = this.platform.is('core');
     if (isMac || desktop) {
