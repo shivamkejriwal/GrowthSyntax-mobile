@@ -21,7 +21,7 @@
             <ion-col right>Change</ion-col>
           </ion-row>  
         </ion-list-header>
-        <ion-item *ngFor="let data of dailyData.mostBought">
+        <ion-item *ngFor="let data of dailyData.mostBought" (click)="loadCompany(data.ticker)">
             <ion-row>
               <ion-col left>{{data.ticker}}</ion-col>
               <ion-col center>{{data.close}}</ion-col>
@@ -38,7 +38,7 @@
             <ion-col right>Change</ion-col>
           </ion-row>  
         </ion-list-header> 
-        <ion-item *ngFor="let data of dailyData.mostSold">
+        <ion-item *ngFor="let data of dailyData.mostSold" (click)="loadCompany(data.ticker)">
             <ion-row>
               <ion-col left>{{data.ticker}}</ion-col>
               <ion-col center>{{data.close}}</ion-col>
@@ -55,7 +55,7 @@
             <ion-col right>Change</ion-col>
           </ion-row>  
         </ion-list-header>
-        <ion-item *ngFor="let data of dailyData.mostTraded">
+        <ion-item *ngFor="let data of dailyData.mostTraded" (click)="loadCompany(data.ticker)">
             <ion-row>
               <ion-col left>{{data.ticker}}</ion-col>
               <ion-col center>{{data.close}}</ion-col>

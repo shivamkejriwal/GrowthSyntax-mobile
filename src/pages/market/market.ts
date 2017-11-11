@@ -44,6 +44,12 @@ export class MarketPage {
     const userID = '000';
     getDocument(afs, `Users/${userID}`, this.userProfileReceived, '');
     this.loadDailyData();
+    this.events.subscribe('loadCompany', ticker => {
+      this.menuCtrl.close();
+      this.loadCompany(ticker);
+      // this.navCtrl.popToRoot().then(() => this.loadCompany(ticker));
+      // this.loadCompany(ticker);
+    });
     
   }
 

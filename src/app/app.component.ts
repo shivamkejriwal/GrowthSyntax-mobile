@@ -91,5 +91,10 @@ export class MyApp {
       this.sideMenu = data;
     });
   }
+
+  loadCompany(ticker) {
+    console.log(`loadCompany(MyApp) - ${ticker}`);
+    this.events.publish('loadCompany', ticker);
+  }
   
 }

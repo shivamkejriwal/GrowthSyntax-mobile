@@ -10,14 +10,16 @@
         <ion-item-group>
             <div *ngIf="searchItems[0]">
                     <ion-item-divider color="primary">Results</ion-item-divider>
-                    <ion-item *ngFor="let item of searchItems">
+                    <ion-item *ngFor="let item of searchItems" (click)="loadCompany(item.ticker)">
                         ({{ item.ticker }}) {{ item.name }}
                     </ion-item>
             </div>
             <div *ngIf="!searchItems[0]">
                 <ion-item-divider color="primary">{{sideMenu.title}}</ion-item-divider>
                 <ion-list>
-                    <ion-item menuClose *ngFor="let item of sideMenu.items" (click)="item.onclick(item.name)">{{item.name}}</ion-item>
+                    <ion-item menuClose *ngFor="let item of sideMenu.items" (click)="item.onclick(item.name)">
+                        {{item.name}}
+                    </ion-item>
                 </ion-list>
             </div>
         </ion-item-group>

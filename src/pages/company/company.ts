@@ -29,8 +29,8 @@ const getCollection = (db: AngularFirestore,loc, callback, done) => {
 })
 export class CompanyPage {
     ticker: string;
-    company: any;
     isReady: boolean = false;
+    company: any;
 
     constructor(public navCtrl: NavController, 
                 public events: Events, 
@@ -48,7 +48,7 @@ export class CompanyPage {
 
     resetCompany() {
         this.company = {
-        fundamentals: [],
+            fundamentals: [],
             profile: {},
             prices: {}
         };
@@ -64,7 +64,7 @@ export class CompanyPage {
 
     private companyProfileReceived = (data, done) => {
         console.log('companyProfileReceived', data);
-        this.company.profile = data;
+        this.company.profile = data ? data : {};
         if (!done) {
             this.events.publish('company', this.company);
         }
@@ -75,7 +75,7 @@ export class CompanyPage {
     
     private companyPricesReceived = (data, done) => {
         console.log('companyPricesReceived', data);
-        this.company.prices = data;
+        this.company.prices = data ? data : {};
         if (!done) {
             this.events.publish('company', this.company);
         }
@@ -87,7 +87,7 @@ export class CompanyPage {
     private companyFundamentalsReceived = (data, done) => {
         console.log('companyFundamentalsReceived', data);
         // data.sort((a, b) => a.date > b.date);
-        this.company.fundamentals = data;
+        this.company.fundamentals = data ? data : [];
         if (!done) {
             this.events.publish('company', this.company);
         }
