@@ -9,4 +9,24 @@
   <h2 *ngIf="user.first">Welcome {{ user.first }}!</h2>
   <button ion-button menuToggle>WatchList</button>
   
+  <ion-item-group>
+      <ion-item-divider color="light">Most Bought</ion-item-divider>
+      <ion-list>
+        <ion-item *ngFor="let data of dailyData.mostBought">
+            {{data.ticker}}
+        </ion-item>
+      </ion-list>
+      <ion-item-divider color="light">Most Sold</ion-item-divider>
+      <ion-list>
+        <ion-item *ngFor="let data of dailyData.mostSold">
+            {{data.ticker}}
+        </ion-item>
+      </ion-list>
+      <ion-item-divider color="light">Most Traded</ion-item-divider>
+      <ion-list>
+        <ion-item *ngFor="let data of dailyData.mostTraded">
+            {{data.ticker}}
+        </ion-item>
+      </ion-list>
+  </ion-item-group>
 </ion-content>

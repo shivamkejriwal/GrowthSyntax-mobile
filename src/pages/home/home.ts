@@ -32,6 +32,8 @@ const getCollection = (db: AngularFirestore,loc, callback, done) => {
 })
 export class HomePage {
   user: any;
+  dailyData:any = {};
+  
   
   constructor(public navCtrl: NavController
             , public menuCtrl: MenuController
@@ -41,6 +43,7 @@ export class HomePage {
     this.reset();
     const userID = '000';
     getDocument(afs, `Users/${userID}`, this.userProfileReceived, '');
+    this.loadDailyData();
     
   }
 
@@ -48,6 +51,37 @@ export class HomePage {
     this.user = {
       watchlist: []
     };
+    this.dailyData = {
+      mostBought: [],
+      mostSold: [],
+      mostTraded: []
+    }
+  }
+
+  loadDailyData = () => {
+    const getMostBought = this.afs.collection<any>('Companies', ref => { 
+      return ref.where('mostBought', '==', true);
+    }).valueChanges();
+
+    getMostBought.subscribe(items => items.forEach(item => {
+      this.dailyData.mostBought.push(item);
+    }));
+
+    const getMostSold = this.afs.collection<any>('Companies', ref => { 
+      return ref.where('mostSold', '==', true);
+    }).valueChanges();
+
+    getMostSold.subscribe(items => items.forEach(item => {
+      this.dailyData.mostSold.push(item);
+    }));
+
+    const getMostTraded = this.afs.collection<any>('Companies', ref => { 
+      return ref.where('mostTraded', '==', true);
+    }).valueChanges();
+
+    getMostTraded.subscribe(items => items.forEach(item => {
+      this.dailyData.mostTraded.push(item);
+    }));
   }
 
   private loadCompany = (ticker) => {
