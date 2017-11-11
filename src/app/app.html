@@ -9,13 +9,13 @@
         <!-- <ion-searchbar (ionInput)="getSearchItems($event)"></ion-searchbar> -->
         <ion-item-group>
             <div *ngIf="searchItems[0]">
-                    <ion-item-divider color="light">Results</ion-item-divider>
+                    <ion-item-divider color="primary">Results</ion-item-divider>
                     <ion-item *ngFor="let item of searchItems">
                         ({{ item.ticker }}) {{ item.name }}
                     </ion-item>
             </div>
             <div *ngIf="!searchItems[0]">
-                <ion-item-divider color="light">{{sideMenu.title}}</ion-item-divider>
+                <ion-item-divider color="primary">{{sideMenu.title}}</ion-item-divider>
                 <ion-list>
                     <ion-item menuClose *ngFor="let item of sideMenu.items" (click)="item.onclick(item.name)">{{item.name}}</ion-item>
                 </ion-list>

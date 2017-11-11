@@ -1,5 +1,8 @@
 <ion-header>
   <ion-navbar>
+    <button ion-button icon-only menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
     <ion-title>App</ion-title>
   </ion-navbar>
 </ion-header>
@@ -7,31 +10,51 @@
 <ion-content padding>
     
   <h2 *ngIf="user.first">Welcome {{ user.first }}!</h2>
-  <button ion-button menuToggle>WatchList</button>
   
   <ion-item-group>
-      <ion-item-divider color="light">Most Bought</ion-item-divider>
+      <ion-item-divider color="secondary">Most Bought</ion-item-divider>
       <ion-list>
+        <ion-list-header>
+          <ion-row>
+            <ion-col left>Ticker</ion-col>
+            <ion-col center>Open</ion-col>
+            <ion-col right>Close</ion-col>
+          </ion-row>  
+        </ion-list-header>
         <ion-item *ngFor="let data of dailyData.mostBought">
             <ion-row>
-                <ion-col left>{{data.ticker}}</ion-col>
-                <ion-col center>{{data.open}}</ion-col>
-                <ion-col right>{{data.close}}</ion-col>
-              </ion-row> 
+              <ion-col left>{{data.ticker}}</ion-col>
+              <ion-col center>{{data.open}}</ion-col>
+              <ion-col right>{{data.close}}</ion-col>
+            </ion-row> 
         </ion-item>
       </ion-list>
-      <ion-item-divider color="light">Most Sold</ion-item-divider>
+      <ion-item-divider color="danger">Most Sold</ion-item-divider>
       <ion-list>
+        <ion-list-header>
+          <ion-row>
+            <ion-col left>Ticker</ion-col>
+            <ion-col center>Open</ion-col>
+            <ion-col right>Close</ion-col>
+          </ion-row>  
+        </ion-list-header> 
         <ion-item *ngFor="let data of dailyData.mostSold">
             <ion-row>
-                <ion-col left>{{data.ticker}}</ion-col>
-                <ion-col center>{{data.open}}</ion-col>
-                <ion-col right>{{data.close}}</ion-col>
-              </ion-row> 
+              <ion-col left>{{data.ticker}}</ion-col>
+              <ion-col center>{{data.open}}</ion-col>
+              <ion-col right>{{data.close}}</ion-col>
+            </ion-row> 
         </ion-item>
       </ion-list>
-      <ion-item-divider color="light">Most Traded</ion-item-divider>
+      <ion-item-divider color="primary">Most Traded</ion-item-divider>
       <ion-list>
+        <ion-list-header>
+          <ion-row>
+            <ion-col left>Ticker</ion-col>
+            <ion-col center>Open</ion-col>
+            <ion-col right>Close</ion-col>
+          </ion-row>  
+        </ion-list-header>
         <ion-item *ngFor="let data of dailyData.mostTraded">
             <ion-row>
               <ion-col left>{{data.ticker}}</ion-col>
