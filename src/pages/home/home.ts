@@ -3,7 +3,7 @@ import { NavController, MenuController, Events } from 'ionic-angular';
 
 import { CompanyPage } from '../company/company';
 import { AngularFirestore } from 'angularfire2/firestore';
-
+import { Utils } from '../../sections/utils';
 
 const feedComplete = (dataFeed, callback, done) => {
   if (!done) {
@@ -64,7 +64,11 @@ export class HomePage {
         return ref.where(key, '==', true);
       }).valueChanges();
       
-    const pushValue = (items, array) => items.forEach(item => array.push(item));
+    const pushValue = (items, array) => items.forEach(item => {
+      const change = Utils.round(((item.close - item.open)/item.open) * 100, 2);
+      item.change = change;
+      array.push(item)
+    });
 
     const getMostBought = createSubscription('mostBought');
     const getMostSold = createSubscription('mostSold');
@@ -73,7 +77,7 @@ export class HomePage {
     getMostBought.subscribe(items => pushValue(items, this.dailyData.mostBought));
     getMostSold.subscribe(items => pushValue(items, this.dailyData.mostSold));
     getMostTraded.subscribe(items => pushValue(items, this.dailyData.mostTraded));
-    
+
   }
 
   private loadCompany = (ticker) => {
