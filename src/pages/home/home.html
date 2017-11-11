@@ -18,20 +18,7 @@
   </div>
 
   <div [hidden]="company.ticker">
-    <ion-item-group>
-        <ion-item-divider color="light">Daily Updates</ion-item-divider>
-        <ion-list>
-          <ion-item *ngFor="let article of articles.updates" (click)="showArticle(article)">
-              {{article.title}}
-          </ion-item>
-        </ion-list>
-        <ion-item-divider color="light">Stock Highlights</ion-item-divider>
-        <ion-list>
-          <ion-item *ngFor="let article of articles.highlights" (click)="showArticle(article)">
-              {{article.title}}
-          </ion-item>
-        </ion-list>
-    </ion-item-group>
+    
       
   </div>
 </ion-content>

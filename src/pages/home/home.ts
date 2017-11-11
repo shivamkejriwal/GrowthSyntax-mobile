@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, MenuController, Events } from 'ionic-angular';
-import { ArticlePage } from '../article/article';
+
 
 import { AngularFirestore } from 'angularfire2/firestore';
 
@@ -33,7 +33,7 @@ const getCollection = (db: AngularFirestore,loc, callback, done) => {
 export class HomePage {
   user: any;
   company: any;
-  articles: any;
+  
 
   constructor(public navCtrl: NavController
             , public menuCtrl: MenuController
@@ -43,7 +43,7 @@ export class HomePage {
     this.reset();
     const userID = '000';
     getDocument(afs, `Users/${userID}`, this.userProfileReceived, '');
-    this.loadArticles();
+    
   }
 
   resetCompany() {
@@ -59,10 +59,7 @@ export class HomePage {
     this.user = {
       watchlist: []
     };
-    this.articles = {
-      updates: [],
-      highlights: []
-    };
+    
     this.resetCompany();
   }
 
@@ -140,38 +137,6 @@ export class HomePage {
     getDocument(this.afs, `Companies/${ticker}/Profile/Data`, this.companyProfileReceived, '');
     getDocument(this.afs, `Companies/${ticker}/Prices/closing-price`, this.companyPricesReceived, '');
     getCollection(this.afs, `Fundamentals/${ticker}/Annual`, this.companyFundamentalsReceived, '');
-  }
-  
-
-  loadArticles() {
-    this.articles = {
-      updates: [],
-      highlights: []
-    };
-    const getUpdates = this.afs.collection<any>('Articles', ref => { 
-      return ref.where('category', '==', 'Stock Market Today').limit(3);
-    }).valueChanges();
-
-    const getHighlights = this.afs.collection<any>('Articles', ref => { 
-      return ref.where('category', '==', 'Stock Highlights').limit(3);
-    }).valueChanges();
-
-    getUpdates.subscribe(items => items.forEach(item => {
-      const title = item.title.split(':')[1];
-      item.title = title;
-      this.articles.updates.push(item);
-    }));
-
-    getHighlights.subscribe(items => items.forEach(item => {
-      const title = item.title.split(':')[1];
-      item.title = title;
-      this.articles.highlights.push(item);
-    }));
-  }
-
-  showArticle(article) {
-    console.log('article',article);
-    this.navCtrl.push(ArticlePage, {article});
   }
 
 }
