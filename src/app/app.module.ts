@@ -7,7 +7,7 @@ import { MyApp } from './app.component';
 
 import { AboutPage } from '../pages/about/about';
 import { GuidePage } from '../pages/guide/guide';
-import { HomePage } from '../pages/home/home';
+import { MarketPage } from '../pages/market/market';
 import { CommentaryPage } from '../pages/commentary/commentary';
 import { CompanyPage } from '../pages/company/company';
 import { ArticlePage } from '../pages/article/article';
@@ -45,7 +45,7 @@ var firebaseConfig = {
     MyApp,
     AboutPage,
     GuidePage,
-    HomePage,
+    MarketPage,
     CommentaryPage,
     CompanyPage,
     ArticlePage,
@@ -71,7 +71,7 @@ var firebaseConfig = {
     MyApp,
     AboutPage,
     GuidePage,
-    HomePage,
+    MarketPage,
     CommentaryPage,
     CompanyPage,
     ArticlePage,
