@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, MenuController } from 'ionic-angular';
 import { ArticlePage } from '../article/article';
 import { AngularFirestore } from 'angularfire2/firestore';
 
@@ -10,7 +10,9 @@ import { AngularFirestore } from 'angularfire2/firestore';
 export class CommentaryPage {
   articles: any;
 
-  constructor(public navCtrl: NavController, private afs: AngularFirestore) {
+  constructor(public navCtrl: NavController, 
+    public menuCtrl: MenuController,
+    private afs: AngularFirestore) {
     this.articles = {
       updates: [],
       highlights: []
@@ -47,6 +49,10 @@ export class CommentaryPage {
   showArticle(article) {
     console.log('article',article);
     this.navCtrl.push(ArticlePage, {article});
+  }
+
+  ionViewDidEnter() {
+    this.menuCtrl.enable(false,'sidemenu');
   }
 
 }

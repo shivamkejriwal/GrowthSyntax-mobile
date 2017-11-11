@@ -35,10 +35,10 @@ export class MarketPage {
   dailyData:any = {};
   
   
-  constructor(public navCtrl: NavController
-            , public menuCtrl: MenuController
-            , public events: Events
-            , private afs: AngularFirestore) {
+  constructor(public navCtrl: NavController, 
+    public menuCtrl: MenuController, 
+    public events: Events, 
+    private afs: AngularFirestore) {
     
     this.reset();
     const userID = '000';
@@ -113,6 +113,10 @@ export class MarketPage {
       title: 'Watchlist',
       items: sideMenuItems
     });
+  }
+
+  ionViewDidEnter() {
+    this.menuCtrl.enable(true,'sidemenu');
   }
 
 }

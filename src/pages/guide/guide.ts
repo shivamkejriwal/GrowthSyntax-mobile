@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, MenuController } from 'ionic-angular';
 
 @Component({
   selector: 'page-guide',
@@ -7,8 +7,13 @@ import { NavController } from 'ionic-angular';
 })
 export class GuidePage {
 
-  constructor(public navCtrl: NavController) {
+  constructor(public navCtrl: NavController,
+    public menuCtrl: MenuController) {
 
+  }
+
+  ionViewDidEnter() {
+    this.menuCtrl.enable(false,'sidemenu');
   }
 
 }
