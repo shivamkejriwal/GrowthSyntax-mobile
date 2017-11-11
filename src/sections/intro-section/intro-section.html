@@ -1,28 +1,15 @@
 <ion-card>
-    <!-- <ion-card-header>Intro</ion-card-header> -->
+    <ion-card-header>Intro</ion-card-header>
     <ion-card-content>
         <div *ngIf="!company.profile.ticker">
-            Somthing
+            Profile
         </div>
         <div *ngIf="company.profile.ticker">
-                <ion-list>
-                    <ion-list-header>
-                        {{company.profile.ticker}}
-                        <ion-badge item-end color="light">${{company.prices.price}}</ion-badge>
-                    </ion-list-header>
-                    <ion-item>
-                        <!-- <ion-col> -->
-                            <div>{{company.profile.name}}</div>
-                            <div>{{company.profile.industry}}</div>
-                            <div>{{company.profile.sector}}</div>
-                        <!-- </ion-col> -->
-                    </ion-item>
-                    <ion-item>
-                        <div  class="chart-container">
-                            <canvas id="polarArea"></canvas>
-                        </div>
-                    </ion-item>
-                </ion-list>
+                <div *ngIf="company.profile.ticker">
+                    <div  class="chart-container">
+                        <canvas id="polarArea"></canvas>
+                    </div>
+                </div>
         </div>
 
         <!-- Card Footer -->

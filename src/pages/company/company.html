@@ -1,0 +1,34 @@
+<ion-header>
+    <ion-navbar>
+      <ion-title>
+        Company
+      </ion-title>
+    </ion-navbar>
+  </ion-header>
+  
+  <ion-content>
+    <ion-row>
+        <ion-col left>
+          {{company.profile.ticker}}
+        </ion-col>
+        <ion-col right>
+          <ion-badge item-end color="light">${{company.prices.price}}</ion-badge>
+        </ion-col>
+    </ion-row>
+    <ion-row>
+        <ion-col>
+            <div>{{company.profile.name}}</div>
+            <div>{{company.profile.industry}}</div>
+            <div>{{company.profile.sector}}</div>
+        </ion-col>
+    </ion-row>
+    <div *ngIf="isReady">
+      <intro-section></intro-section>
+      <health-section></health-section>
+      <value-section></value-section>
+      <performance-section></performance-section>
+      <management-section></management-section>
+      <dividend-section></dividend-section>
+    </div>
+  </ion-content>
+  

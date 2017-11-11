@@ -32,7 +32,12 @@ const round = (value, precision) => {
 
 const divide = (a,b) => round(a/b, 2);
 
-const average = (array) => round(array.reduce((a, b) => a + b) / array.length, 2);
+const average = (array) => {
+    if (array.length < 1) {
+        return array[0] ? array[0] : 0;
+    }
+    return round(array.reduce((a, b) => a + b) / array.length, 2)
+};
 
 const median = (array) => {
     array.sort((a, b) => a - b);

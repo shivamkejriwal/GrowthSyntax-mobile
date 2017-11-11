@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, MenuController, Events } from 'ionic-angular';
 
-
+import { CompanyPage } from '../company/company';
 import { AngularFirestore } from 'angularfire2/firestore';
 
 
@@ -32,9 +32,7 @@ const getCollection = (db: AngularFirestore,loc, callback, done) => {
 })
 export class HomePage {
   user: any;
-  company: any;
   
-
   constructor(public navCtrl: NavController
             , public menuCtrl: MenuController
             , public events: Events
@@ -46,21 +44,16 @@ export class HomePage {
     
   }
 
-  resetCompany() {
-    this.company = {
-      fundamentals: [],
-      profile: {},
-      prices: {}
-    };
-    this.events.publish('company:reset');
-  }
-
   reset() {
     this.user = {
       watchlist: []
     };
+  }
+
+  private loadCompany = (ticker) => {
     
-    this.resetCompany();
+    console.log(`loadCompanyPage(${ticker})`);
+    this.navCtrl.push(CompanyPage, {ticker});
   }
 
   private userProfileReceived = (data) => {
@@ -74,7 +67,9 @@ export class HomePage {
     watchlist.forEach(ticker => {
       sideMenuItems.push({
         name: ticker,
-        onclick : this.loadCompany
+        onclick : () => {
+          this.loadCompany(ticker);
+        }
       });
     });
     
@@ -82,61 +77,6 @@ export class HomePage {
       title: 'Watchlist',
       items: sideMenuItems
     });
-  }
-
-  private companyProfileReceived = (data, done) => {
-    console.log('companyProfileReceived', data);
-    this.company.profile = data;
-    if (!done) {
-      this.events.publish('company', this.company);
-    }
-    else {
-      done();
-    }
-  }
-
-  private companyPricesReceived = (data, done) => {
-    console.log('companyPricesReceived', data);
-    this.company.prices = data;
-    if (!done) {
-      this.events.publish('company', this.company);
-    }
-    else {
-      done();
-    }
-  }
-
-  private companyFundamentalsReceived = (data, done) => {
-    console.log('companyFundamentalsReceived', data);
-    // data.sort((a, b) => a.date > b.date);
-    this.company.fundamentals = data;
-    if (!done) {
-      this.events.publish('company', this.company);
-    }
-    else {
-      done();
-    }
-  }
-
-  private loadCompany = (ticker) => {
-    console.log(`loadCompany - ${ticker}`);
-    if (ticker !== this.company.ticker) {
-      this.resetCompany();
-    }
-    this.company.ticker = ticker;
-
-    // let count = 0;
-    // const done = () => {
-    //   count++;
-    //   console.log(`loadCompany-done : ${count}`);
-    //   if (count > 1) {
-    //     this.events.publish('company', this.company);
-    //   }
-    // }
-
-    getDocument(this.afs, `Companies/${ticker}/Profile/Data`, this.companyProfileReceived, '');
-    getDocument(this.afs, `Companies/${ticker}/Prices/closing-price`, this.companyPricesReceived, '');
-    getCollection(this.afs, `Fundamentals/${ticker}/Annual`, this.companyFundamentalsReceived, '');
   }
 
 }

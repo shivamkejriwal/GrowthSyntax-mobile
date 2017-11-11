@@ -8,17 +8,5 @@
     
   <h2 *ngIf="user.first">Welcome {{ user.first }}!</h2>
   <button ion-button menuToggle>WatchList</button>
-  <div [hidden]="!company.ticker">
-      <intro-section></intro-section>
-      <health-section></health-section>
-      <value-section></value-section>
-      <performance-section></performance-section>
-      <management-section></management-section>
-      <dividend-section></dividend-section>
-  </div>
-
-  <div [hidden]="company.ticker">
-    
-      
-  </div>
+  
 </ion-content>
