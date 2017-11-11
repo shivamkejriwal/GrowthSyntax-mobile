@@ -59,29 +59,21 @@ export class HomePage {
   }
 
   loadDailyData = () => {
-    const getMostBought = this.afs.collection<any>('Companies', ref => { 
-      return ref.where('mostBought', '==', true);
-    }).valueChanges();
+    const createSubscription = (key) => this.afs
+      .collection<any>('Companies', ref => { 
+        return ref.where(key, '==', true);
+      }).valueChanges();
+      
+    const pushValue = (items, array) => items.forEach(item => array.push(item));
 
-    getMostBought.subscribe(items => items.forEach(item => {
-      this.dailyData.mostBought.push(item);
-    }));
+    const getMostBought = createSubscription('mostBought');
+    const getMostSold = createSubscription('mostSold');
+    const getMostTraded = createSubscription('mostTraded');
 
-    const getMostSold = this.afs.collection<any>('Companies', ref => { 
-      return ref.where('mostSold', '==', true);
-    }).valueChanges();
-
-    getMostSold.subscribe(items => items.forEach(item => {
-      this.dailyData.mostSold.push(item);
-    }));
-
-    const getMostTraded = this.afs.collection<any>('Companies', ref => { 
-      return ref.where('mostTraded', '==', true);
-    }).valueChanges();
-
-    getMostTraded.subscribe(items => items.forEach(item => {
-      this.dailyData.mostTraded.push(item);
-    }));
+    getMostBought.subscribe(items => pushValue(items, this.dailyData.mostBought));
+    getMostSold.subscribe(items => pushValue(items, this.dailyData.mostSold));
+    getMostTraded.subscribe(items => pushValue(items, this.dailyData.mostTraded));
+    
   }
 
   private loadCompany = (ticker) => {
