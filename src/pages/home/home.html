@@ -13,19 +13,31 @@
       <ion-item-divider color="light">Most Bought</ion-item-divider>
       <ion-list>
         <ion-item *ngFor="let data of dailyData.mostBought">
-            {{data.ticker}}
+            <ion-row>
+                <ion-col left>{{data.ticker}}</ion-col>
+                <ion-col center>{{data.open}}</ion-col>
+                <ion-col right>{{data.close}}</ion-col>
+              </ion-row> 
         </ion-item>
       </ion-list>
       <ion-item-divider color="light">Most Sold</ion-item-divider>
       <ion-list>
         <ion-item *ngFor="let data of dailyData.mostSold">
-            {{data.ticker}}
+            <ion-row>
+                <ion-col left>{{data.ticker}}</ion-col>
+                <ion-col center>{{data.open}}</ion-col>
+                <ion-col right>{{data.close}}</ion-col>
+              </ion-row> 
         </ion-item>
       </ion-list>
       <ion-item-divider color="light">Most Traded</ion-item-divider>
       <ion-list>
         <ion-item *ngFor="let data of dailyData.mostTraded">
-            {{data.ticker}}
+            <ion-row>
+              <ion-col left>{{data.ticker}}</ion-col>
+              <ion-col center>{{data.open}}</ion-col>
+              <ion-col right>{{data.close}}</ion-col>
+            </ion-row>   
         </ion-item>
       </ion-list>
   </ion-item-group>
