@@ -1,0 +1,67 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button icon-only menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Market</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    
+  <h2 *ngIf="user.first">Welcome {{ user.first }}!</h2>
+  
+  <ion-item-group>
+      <ion-item-divider color="secondary">Gainers</ion-item-divider>
+      <ion-list>
+        <ion-list-header>
+          <ion-row>
+            <ion-col left>Ticker</ion-col>
+            <ion-col center>Close</ion-col>
+            <ion-col right>Change</ion-col>
+          </ion-row>  
+        </ion-list-header>
+        <ion-item *ngFor="let data of dailyData.mostBought">
+            <ion-row>
+              <ion-col left>{{data.ticker}}</ion-col>
+              <ion-col center>{{data.close}}</ion-col>
+              <ion-col right>{{data.change}}%</ion-col>
+            </ion-row> 
+        </ion-item>
+      </ion-list>
+      <ion-item-divider color="danger">Losers</ion-item-divider>
+      <ion-list>
+        <ion-list-header>
+          <ion-row>
+            <ion-col left>Ticker</ion-col>
+            <ion-col center>Close</ion-col>
+            <ion-col right>Change</ion-col>
+          </ion-row>  
+        </ion-list-header> 
+        <ion-item *ngFor="let data of dailyData.mostSold">
+            <ion-row>
+              <ion-col left>{{data.ticker}}</ion-col>
+              <ion-col center>{{data.close}}</ion-col>
+              <ion-col right>{{data.change}}%</ion-col>
+            </ion-row> 
+        </ion-item>
+      </ion-list>
+      <ion-item-divider color="primary">Most Traded</ion-item-divider>
+      <ion-list>
+        <ion-list-header>
+          <ion-row>
+            <ion-col left>Ticker</ion-col>
+            <ion-col center>Close</ion-col>
+            <ion-col right>Change</ion-col>
+          </ion-row>  
+        </ion-list-header>
+        <ion-item *ngFor="let data of dailyData.mostTraded">
+            <ion-row>
+              <ion-col left>{{data.ticker}}</ion-col>
+              <ion-col center>{{data.close}}</ion-col>
+              <ion-col right>{{data.change}}%</ion-col>
+            </ion-row>   
+        </ion-item>
+      </ion-list>
+  </ion-item-group>
+</ion-content>
