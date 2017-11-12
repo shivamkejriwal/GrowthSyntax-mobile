@@ -161,7 +161,22 @@ export class LoginPage {
         .catch(error => console.log(error));
     }
 
+    private signInWithRedirect() {
+        const provider = new firebase.auth.GoogleAuthProvider();
+        this.afAuth.auth.signInWithRedirect(provider)
+        .then(() => {
+            return this.afAuth.auth.getRedirectResult()
+            .then(result => {
+                const token = result.credential.accessToken;
+                const user = result.user;
+                return this.updateUserData(user);
+            });
+        }).then(this.afterSignIn)
+        .catch(error => console.log(error));
+    }
+
     private socialSignIn(provider) {
+        // https://g926q.app.goo.gl/
         return this.afAuth.auth.signInWithPopup(provider)
             .then((credential) =>  this.updateUserData(credential.user))
             .then(this.afterSignIn)

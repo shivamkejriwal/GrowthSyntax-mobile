@@ -17,6 +17,14 @@
         </ion-card-header>
 
         <ion-row>
+                <ion-col center>
+                    <button ion-button icon-left outline (click)="signInWithRedirect()" full>
+                        <ion-icon name="logo-google"></ion-icon>
+                        Google with redirect
+                    </button>
+                </ion-col>
+            </ion-row>
+        <ion-row>
             <ion-col center>
                 <button ion-button icon-left outline (click)="googleLogin()" full>
                     <ion-icon name="logo-google"></ion-icon>
