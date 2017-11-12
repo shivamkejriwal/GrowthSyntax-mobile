@@ -83,6 +83,12 @@
     <plugin name="cordova-plugin-ionic-webview" spec="^1.1.11" />
     <plugin name="cordova-plugin-firebase" spec="^0.1.24" />
     <engine name="browser" spec="~5.0.1" />
+    <universal-links>
+        <host name="https://g926q.app.goo.gl/" scheme="https" />
+        <host name="growthsyntax.firebaseapp.com" scheme="https">
+            <path url="/__/auth/callback" />
+        </host>
+    </universal-links>
     <plugin name="cordova-plugin-buildinfo" spec="^2.0.1" />
     <plugin name="cordova-universal-links-plugin" spec="^1.2.1" />
     <plugin name="cordova-plugin-browsertab" spec="^0.2.0" />
@@ -90,10 +96,4 @@
     <plugin name="cordova-plugin-customurlscheme" spec="^4.3.0">
         <variable name="URL_SCHEME" value="com.growthsyntax.ios" />
     </plugin>
-    <universal-links>
-        <host name="https://g926q.app.goo.gl/" scheme="https" />
-        <host name="growthsyntax.firebaseapp.com" scheme="https">
-            <path url="/__/auth/callback"/>
-        </host>
-    </universal-links>
 </widget>
