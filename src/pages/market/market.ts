@@ -5,6 +5,8 @@ import { CompanyPage } from '../company/company';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { Utils } from '../../sections/utils';
 
+import { LoginPage } from '../login/login';
+
 const feedComplete = (dataFeed, callback, done) => {
   if (!done) {
     dataFeed.subscribe(data => callback(data))
@@ -51,6 +53,10 @@ export class MarketPage {
       // this.loadCompany(ticker);
     });
     
+  }
+
+  goToProfile() {
+    this.navCtrl.push(LoginPage);
   }
 
   reset() {

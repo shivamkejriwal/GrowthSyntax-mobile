@@ -3,6 +3,8 @@ import { NavController, MenuController } from 'ionic-angular';
 import { ArticlePage } from '../article/article';
 import { AngularFirestore } from 'angularfire2/firestore';
 
+import { LoginPage } from '../login/login';
+
 @Component({
   selector: 'page-commentary',
   templateUrl: 'commentary.html'
@@ -18,6 +20,10 @@ export class CommentaryPage {
       highlights: []
     };
     this.loadArticles();
+  }
+
+  goToProfile() {
+    this.navCtrl.push(LoginPage);
   }
 
   loadArticles() {

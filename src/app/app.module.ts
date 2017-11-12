@@ -11,6 +11,7 @@ import { MarketPage } from '../pages/market/market';
 import { CommentaryPage } from '../pages/commentary/commentary';
 import { CompanyPage } from '../pages/company/company';
 import { ArticlePage } from '../pages/article/article';
+import { LoginPage } from '../pages/login/login';
 import { TabsPage } from '../pages/tabs/tabs';
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -49,6 +50,7 @@ var firebaseConfig = {
     CommentaryPage,
     CompanyPage,
     ArticlePage,
+    LoginPage,
     TabsPage,
     ValueSection,
     HealthSection,
@@ -75,6 +77,7 @@ var firebaseConfig = {
     CommentaryPage,
     CompanyPage,
     ArticlePage,
+    LoginPage,
     TabsPage
   ],
   providers: [

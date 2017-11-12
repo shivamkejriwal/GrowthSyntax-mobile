@@ -1,0 +1,52 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>
+        Login
+        </ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+    <ion-card>
+        <ion-card-header *ngIf='currentUser'> 
+            Hello {{ user.name }}!
+        </ion-card-header>
+        <ion-card-header *ngIf='!currentUser'> 
+            Please Login
+        </ion-card-header>
+
+        <ion-row>
+            <ion-col center>
+                <button ion-button icon-left outline (click)="googleLogin()" full>
+                    <ion-icon name="logo-google"></ion-icon>
+                    Login with Google
+                </button>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col center>
+                <button ion-button icon-left outline (click)="facebookLogin()" full>
+                    <ion-icon name="logo-facebook"></ion-icon>
+                    Login with Facebook 
+                </button>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col center>
+                    <button ion-button icon-left outline (click)="anonymousLogin()" full>
+                        <ion-icon name="eye-off"></ion-icon>
+                        Anonymous Login 
+                    </button>
+            </ion-col>
+        </ion-row>
+        <ion-row *ngIf="authenticated">
+            <ion-col left></ion-col>
+            <ion-col center>
+                <button ion-button color="danger" (click)="logout()">Logout</button>
+            </ion-col>
+            <ion-col right></ion-col>
+        </ion-row>
+    </ion-card>
+    
+</ion-content>

@@ -4,8 +4,10 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { TabsPage } from '../pages/tabs/tabs';
+import { LoginPage } from '../pages/login/login';
 
 import { AngularFirestore } from 'angularfire2/firestore';
+import { AngularFireAuth } from 'angularfire2/auth';
 import { Observable, Subscription } from 'rxjs';
 
 const getCollection = (db:AngularFirestore, queryString:string, limit: number) => {
@@ -35,16 +37,18 @@ const getCollection = (db:AngularFirestore, queryString:string, limit: number) =
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = TabsPage;
+  rootPage:any = null;
+  authState: any = null;
   sideMenu:any;
   searchItems:Array<any> = [];
   searchSubscription: Subscription;
 
-  constructor(platform: Platform
-          , public events: Events
-          , statusBar: StatusBar
-          , splashScreen: SplashScreen
-          , private afs: AngularFirestore) {
+  constructor(platform: Platform,
+          public events: Events,
+          statusBar: StatusBar,
+          splashScreen: SplashScreen,
+          public afAuth: AngularFireAuth,
+          private afs: AngularFirestore) {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
@@ -52,7 +56,32 @@ export class MyApp {
       splashScreen.hide();
       
     });
+    this.setupAuth();
     this.setupMenu();
+  }
+
+  setupAuth() {
+    const authSubscription = this.afAuth.authState.subscribe(auth => {
+      this.getUserProfile(auth).then(profile => {
+        this.rootPage = (profile) ? TabsPage : LoginPage;
+        authSubscription.unsubscribe();
+        // if (profile) {
+        //   authSubscription.unsubscribe();
+        // }
+        console.log('MyApp-setupAuth', this.authState);
+      })
+    });
+  }
+
+  getUserProfile(auth): any {
+    this.authState = auth;
+    const uid = this.authState ? this.authState.uid : ''
+    if (!uid) {
+        return Promise.resolve(false);
+    }
+    const loc = `/Users/${uid}`;
+    const doc = this.afs.doc(loc);
+    return doc.valueChanges().take(1).toPromise();
   }
 
   clearSearch() {
