@@ -161,8 +161,8 @@ export class LoginPage {
         .catch(error => console.log(error));
     }
 
-    private signInWithRedirect() {
-        const provider = new firebase.auth.GoogleAuthProvider();
+    private signInWithRedirect(provider) {
+        // const provider = new firebase.auth.GoogleAuthProvider();
         this.afAuth.auth.signInWithRedirect(provider)
         .then(() => {
             return this.afAuth.auth.getRedirectResult()
@@ -189,16 +189,20 @@ export class LoginPage {
         return this.socialSignIn(provider);
     }
 
-    googleLogin() {
+    googleLogin(useRedirect) {
         this.reset();
         const provider = new firebase.auth.GoogleAuthProvider()
-        return this.socialSignIn(provider);
+        return useRedirect 
+        ? this.signInWithRedirect(provider)
+        : this.socialSignIn(provider);
     }
 
-    facebookLogin() {
+    facebookLogin(useRedirect) {
         this.reset();
         const provider = new firebase.auth.FacebookAuthProvider()
-        return this.socialSignIn(provider);
+        return useRedirect 
+        ? this.signInWithRedirect(provider)
+        : this.socialSignIn(provider);
     }
 
     twitterLogin(){

@@ -17,16 +17,8 @@
         </ion-card-header>
 
         <ion-row>
-                <ion-col center>
-                    <button ion-button icon-left outline (click)="signInWithRedirect()" full>
-                        <ion-icon name="logo-google"></ion-icon>
-                        Google with redirect
-                    </button>
-                </ion-col>
-            </ion-row>
-        <ion-row>
             <ion-col center>
-                <button ion-button icon-left outline (click)="googleLogin()" full>
+                <button ion-button icon-left outline (click)="googleLogin('true')" full>
                     <ion-icon name="logo-google"></ion-icon>
                     Login with Google
                 </button>
@@ -34,7 +26,7 @@
         </ion-row>
         <ion-row>
             <ion-col center>
-                <button ion-button icon-left outline (click)="facebookLogin()" full>
+                <button ion-button icon-left outline (click)="facebookLogin('true')" full>
                     <ion-icon name="logo-facebook"></ion-icon>
                     Login with Facebook 
                 </button>
