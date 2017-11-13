@@ -34,6 +34,7 @@
     "chart.js": "^2.7.1",
     "cordova-browser": "5.0.1",
     "cordova-ios": "4.5.3",
+    "cordova-plugin-add-swift-support": "^1.7.0",
     "cordova-plugin-browsertab": "^0.2.0",
     "cordova-plugin-buildinfo": "^2.0.1",
     "cordova-plugin-compat": "^1.2.0",
@@ -41,6 +42,7 @@
     "cordova-plugin-device": "^1.1.4",
     "cordova-plugin-firebase": "^0.1.24",
     "cordova-plugin-inappbrowser": "^1.7.2",
+    "cordova-plugin-ionic": "^2.0.3",
     "cordova-plugin-ionic-webview": "^1.1.16",
     "cordova-plugin-splashscreen": "^4.0.3",
     "cordova-plugin-whitelist": "^1.3.1",
@@ -73,6 +75,13 @@
       "cordova-plugin-inappbrowser": {},
       "cordova-plugin-customurlscheme": {
         "URL_SCHEME": "io.ionic.growthsyntax"
+      },
+      "cordova-plugin-ionic": {
+        "APP_ID": "a92105c3",
+        "CHANNEL_NAME": "Master",
+        "UPDATE_METHOD": "background",
+        "UPDATE_API": "https://api.ionicjs.com",
+        "MAX_STORE": "2"
       }
     },
     "platforms": [
