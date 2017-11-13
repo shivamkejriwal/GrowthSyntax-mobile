@@ -17,12 +17,12 @@ export class DividendSection {
 
   constructor(public events: Events) {
     this.reset();
-    this.events.subscribe('company', data => this.loadData(data));
+    this.events.subscribe('company', this.loadData);
     this.events.subscribe('company:reset', this.reset);
   }
 
   private loadData = (data) => {
-    console.log('DividendSection-loadData');
+    console.log('DividendSection-loadData', data);
     this.company = data;
     const dataComplete = Boolean(data.profile.ticker
                           && data.prices.ticker

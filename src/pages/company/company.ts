@@ -45,9 +45,12 @@ export class CompanyPage {
         
     }
 
-    setProfile(profile) {
+    setProfile(data) {
+        const profile = data && data.profile;
         const populated = this.company && profile;
         if (populated) {
+            profile.ticker = data.ticker;
+            profile.date = data.date;
             this.company.profile = profile;
         }
     }
@@ -56,7 +59,8 @@ export class CompanyPage {
         const populated = this.company && company;
         if (populated) {
             this.company.prices = {
-                price: company.close
+                price: company.close,
+                ticker: company.ticker
             };
         }
     }
@@ -87,13 +91,14 @@ export class CompanyPage {
 
     private companyProfileReceived = (data, done) => {
         console.log('companyProfileReceived', data);
-        this.setProfile(data.profile);
+        this.setProfile(data);
         this.setPrices(data);
         console.log('profile-Received', {
             data,
             company: this.company
         });
         if (!done) {
+            console.log('publish on companyProfileReceived');
             this.events.publish('company', this.company);
         }
         else {
@@ -105,6 +110,7 @@ export class CompanyPage {
         console.log('companyFundamentalsReceived', data);
         this.setFundamentals(data);
         if (!done) {
+            console.log('publish on companyFundamentalsReceived');
             this.events.publish('company', this.company);
         }
         else {
@@ -117,15 +123,16 @@ export class CompanyPage {
         this.company.ticker = ticker;
         this.isReady = true;
 
-        let count = 0;
-        const done = () => {
-            count++;
-            console.log(`loadCompany-done : ${count}`);
-            if (count >= 1) {
-                console.log(`loadCompany-publish : ${count}`);
-                this.events.publish('company', this.company);
-            }
-        }
+        // let count = 0;
+        // const done = () => {
+        //     count++;
+        //     console.log(`loadCompany-done : ${count}`);
+        //     if (count >= 1) {
+        //         console.log(`loadCompany-publish : ${count}`);
+        //         this.events.publish('company', this.company);
+        //     }
+        // }
+        const done = '';
 
         getDocument(this.afs, `Companies/${ticker}`, this.companyProfileReceived, done);
         getCollection(this.afs, `Fundamentals/${ticker}/Annual`, this.companyFundamentalsReceived, done);
