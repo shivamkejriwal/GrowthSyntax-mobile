@@ -25,6 +25,12 @@
               {{article.title}}
           </ion-item>
         </ion-list>
+        <ion-item-divider color="primary">Market and Economy</ion-item-divider>
+        <ion-list>
+          <ion-item *ngFor="let article of articles.marketAndEconomy" (click)="showArticle(article)">
+              {{article.title}}
+          </ion-item>
+        </ion-list>
     </ion-item-group>
   </ion-content>
   

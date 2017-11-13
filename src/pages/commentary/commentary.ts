@@ -17,7 +17,8 @@ export class CommentaryPage {
     private afs: AngularFirestore) {
     this.articles = {
       updates: [],
-      highlights: []
+      highlights: [],
+      marketAndEconomy: []
     };
     this.loadArticles();
   }
@@ -29,14 +30,25 @@ export class CommentaryPage {
   loadArticles() {
     this.articles = {
       updates: [],
-      highlights: []
+      highlights: [],
+      marketAndEconomy: []
     };
     const getUpdates = this.afs.collection<any>('Articles', ref => { 
-      return ref.where('category', '==', 'Stock Market Today').limit(3);
+      return ref.where('category', '==', 'Stock Market Today')
+                .orderBy('date','desc')
+                .limit(3);
     }).valueChanges();
 
     const getHighlights = this.afs.collection<any>('Articles', ref => { 
-      return ref.where('category', '==', 'Stock Highlights').limit(3);
+      return ref.where('category', '==', 'Stock Highlights')
+                .orderBy('date','desc')
+                .limit(3);
+    }).valueChanges();
+
+    const getMarketAndEconomy = this.afs.collection<any>('Articles', ref => { 
+      return ref.where('category', '==', 'Market and Economy')
+                .orderBy('date','desc')
+                .limit(3);
     }).valueChanges();
 
     getUpdates.subscribe(items => items.forEach(item => {
@@ -50,9 +62,14 @@ export class CommentaryPage {
       item.title = title;
       this.articles.highlights.push(item);
     }));
+
+    getMarketAndEconomy.subscribe(items => items.forEach(item => {
+      this.articles.marketAndEconomy.push(item);
+    }));
   }
 
   showArticle(article) {
+    // console.log('articles',this.articles);
     console.log('article',article);
     this.navCtrl.push(ArticlePage, {article});
   }
