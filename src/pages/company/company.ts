@@ -40,10 +40,33 @@ export class CompanyPage {
         this.ticker = this.navParams.get('ticker');
         console.log('CompanyPage', this.ticker);
         
-        this.resetCompany().then(()=> {
-            this.loadCompany(this.ticker);
-        });
+        this.resetCompany()
+        .then(() => this.loadCompany(this.ticker));
         
+    }
+
+    setProfile(profile) {
+        const populated = this.company && profile;
+        if (populated) {
+            this.company.profile = profile;
+        }
+    }
+
+    setPrices(company) {
+        const populated = this.company && company;
+        if (populated) {
+            this.company.prices = {
+                price: company.close
+            };
+        }
+    }
+    
+    setFundamentals(data) {
+        const populated = this.company && data;
+        if (populated) {
+            // data.sort((a, b) => a.date > b.date);
+            this.company.fundamentals = data;
+        }
     }
 
     resetCompany() {
@@ -64,18 +87,12 @@ export class CompanyPage {
 
     private companyProfileReceived = (data, done) => {
         console.log('companyProfileReceived', data);
-        this.company.profile = data ? data : {};
-        if (!done) {
-            this.events.publish('company', this.company);
-        }
-        else {
-            done();
-        }
-    }
-    
-    private companyPricesReceived = (data, done) => {
-        console.log('companyPricesReceived', data);
-        this.company.prices = data ? data : {};
+        this.setProfile(data.profile);
+        this.setPrices(data);
+        console.log('profile-Received', {
+            data,
+            company: this.company
+        });
         if (!done) {
             this.events.publish('company', this.company);
         }
@@ -86,8 +103,7 @@ export class CompanyPage {
     
     private companyFundamentalsReceived = (data, done) => {
         console.log('companyFundamentalsReceived', data);
-        // data.sort((a, b) => a.date > b.date);
-        this.company.fundamentals = data ? data : [];
+        this.setFundamentals(data);
         if (!done) {
             this.events.publish('company', this.company);
         }
@@ -98,24 +114,21 @@ export class CompanyPage {
     
     private loadCompany = (ticker) => {
         console.log(`loadCompany - ${ticker}`);
-        // if (ticker !== this.company.ticker) {
-        //     this.resetCompany();
-        // }
         this.company.ticker = ticker;
         this.isReady = true;
 
-        // let count = 0;
-        // const done = () => {
-        //   count++;
-        //   console.log(`loadCompany-done : ${count}`);
-        //   if (count > 1) {
-        //     this.events.publish('company', this.company);
-        //   }
-        // }
+        let count = 0;
+        const done = () => {
+            count++;
+            console.log(`loadCompany-done : ${count}`);
+            if (count >= 1) {
+                console.log(`loadCompany-publish : ${count}`);
+                this.events.publish('company', this.company);
+            }
+        }
 
-        getDocument(this.afs, `Companies/${ticker}/Profile/Data`, this.companyProfileReceived, '');
-        getDocument(this.afs, `Companies/${ticker}/Prices/closing-price`, this.companyPricesReceived, '');
-        getCollection(this.afs, `Fundamentals/${ticker}/Annual`, this.companyFundamentalsReceived, '');
+        getDocument(this.afs, `Companies/${ticker}`, this.companyProfileReceived, done);
+        getCollection(this.afs, `Fundamentals/${ticker}/Annual`, this.companyFundamentalsReceived, done);
     }
 
 }

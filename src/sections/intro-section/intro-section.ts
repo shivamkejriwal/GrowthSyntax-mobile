@@ -13,7 +13,7 @@ export class IntroSection {
   ticker: string = '';
   
   constructor(public events: Events) {
-    this.events.subscribe('company', this.loadData);
+    this.events.subscribe('company', data => this.loadData(data));
     this.events.subscribe('company:reset', this.reset);
     this.reset();
   }
