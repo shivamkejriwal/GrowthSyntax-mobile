@@ -48,7 +48,7 @@ export class CommentaryPage {
     const getMarketAndEconomy = this.afs.collection<any>('Articles', ref => { 
       return ref.where('category', '==', 'Market and Economy')
                 .orderBy('date','desc')
-                .limit(3);
+                .limit(5);
     }).valueChanges();
 
     getUpdates.subscribe(items => items.forEach(item => {

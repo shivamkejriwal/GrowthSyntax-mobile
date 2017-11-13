@@ -13,19 +13,34 @@
   
   <ion-content>
       <ion-item-group>
-        <ion-item-divider color="primary">Daily Updates</ion-item-divider>
+        <ion-item-divider color="primary">Daily Updates
+            <button ion-button clear color="light" icon-end item-end>
+                More
+                <ion-icon name='arrow-dropright'></ion-icon>
+            </button>
+        </ion-item-divider>
         <ion-list>
           <ion-item *ngFor="let article of articles.updates" (click)="showArticle(article)">
               {{article.title}}
           </ion-item>
         </ion-list>
-        <ion-item-divider color="primary">Stock Highlights</ion-item-divider>
+        <ion-item-divider color="primary">Stock Highlights
+            <button ion-button clear color="light" icon-end item-end>
+                More
+                <ion-icon name='arrow-dropright'></ion-icon>
+            </button>
+        </ion-item-divider>
         <ion-list>
           <ion-item *ngFor="let article of articles.highlights" (click)="showArticle(article)">
               {{article.title}}
           </ion-item>
         </ion-list>
-        <ion-item-divider color="primary">Market and Economy</ion-item-divider>
+        <ion-item-divider color="primary">Market and Economy
+            <button ion-button clear color="light" icon-end item-end>
+                More
+                <ion-icon name='arrow-dropright'></ion-icon>
+            </button>
+        </ion-item-divider>
         <ion-list>
           <ion-item *ngFor="let article of articles.marketAndEconomy" (click)="showArticle(article)">
               {{article.title}}
