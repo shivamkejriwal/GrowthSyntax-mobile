@@ -40,24 +40,31 @@ export class CommentaryPage {
       return item;
     }
 
-    const getSubscription = (category, limit, callback) => {
-      this.afs.collection<any>('Articles', ref => ref
+    const getSubscription = (category, limit, type, callback) => {
+      const collection = this.afs.collection<any>('Articles', ref => ref
           .where('category', '==', category)
           .orderBy('date','desc')
-          .limit(limit))
-        .valueChanges().subscribe(callback);
+          .limit(limit));
+      if (type === 'values') {
+        collection.valueChanges().subscribe(callback);
+      } else {
+        collection.snapshotChanges(['added']).subscribe(callback);
+      }
     }
 
-    getSubscription('Stock Market Today', 3, items => {
-      this.articles.updates = items.map(item => fixTitle(item));
+    getSubscription('Stock Market Today', 3, 'snapshot', items => {
+      this.articles.updates = items
+        .map(item => fixTitle(item.payload.doc.data()));
     });
 
-    getSubscription('Stock Highlights', 3, items => {
-      this.articles.highlights = items.map(item => fixTitle(item));
+    getSubscription('Stock Highlights', 3, 'snapshot', items => {
+      this.articles.highlights = items
+        .map(item => fixTitle(item.payload.doc.data()));
     });
     
-    getSubscription('Market and Economy', 5, items => {
-      this.articles.marketAndEconomy = items;
+    getSubscription('Market and Economy', 5, 'snapshot', items => {
+      this.articles.marketAndEconomy = items
+        .map(item => item.payload.doc.data());
     });
     
   }
