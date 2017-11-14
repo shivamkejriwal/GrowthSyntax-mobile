@@ -17,7 +17,7 @@
   <h2 *ngIf="user.first">Welcome {{ user.first }}!</h2>
 
   <div padding>
-    <ion-segment [(ngModel)]="trades">
+    <ion-segment mode="ios" [(ngModel)]="trades">
       <ion-segment-button value="gainers"> Gainers </ion-segment-button>
       <ion-segment-button value="losers"> Losers </ion-segment-button>
       <ion-segment-button value="active"> Active </ion-segment-button>
@@ -26,7 +26,7 @@
 
   <div [ngSwitch]="trades">
     <ion-list *ngSwitchCase="'gainers'">
-        <ion-list-header>
+        <ion-list-header mode="ios">
           <ion-row>
             <ion-col left>Ticker</ion-col>
             <ion-col center>Close</ion-col>
@@ -43,7 +43,7 @@
     </ion-list>
 
     <ion-list *ngSwitchCase="'losers'">
-      <ion-list-header>
+      <ion-list-header mode="ios">
         <ion-row>
           <ion-col left>Ticker</ion-col>
           <ion-col center>Close</ion-col>
@@ -60,7 +60,7 @@
     </ion-list>
 
     <ion-list *ngSwitchCase="'active'">
-      <ion-list-header>
+      <ion-list-header mode="ios">
         <ion-row>
           <ion-col left>Ticker</ion-col>
           <ion-col center>Close</ion-col>
