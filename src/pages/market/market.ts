@@ -35,6 +35,7 @@ const getCollection = (db: AngularFirestore,loc, callback, done) => {
 export class MarketPage {
   user: any;
   dailyData:any = {};
+  trades: string = 'gainers';
   
   
   constructor(public navCtrl: NavController, 
