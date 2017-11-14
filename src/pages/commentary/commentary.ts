@@ -11,6 +11,7 @@ import { LoginPage } from '../login/login';
 })
 export class CommentaryPage {
   articles: any;
+  type: string = 'topics';
 
   constructor(public navCtrl: NavController, 
     public menuCtrl: MenuController,
@@ -18,7 +19,8 @@ export class CommentaryPage {
     this.articles = {
       updates: [],
       highlights: [],
-      marketAndEconomy: []
+      marketAndEconomy: [],
+      recent: []
     };
     this.loadArticles();
   }
@@ -31,7 +33,8 @@ export class CommentaryPage {
     this.articles = {
       updates: [],
       highlights: [],
-      marketAndEconomy: []
+      marketAndEconomy: [],
+      recent: []
     };
 
     const fixTitle = (item) => {
@@ -67,6 +70,18 @@ export class CommentaryPage {
         .map(item => item.payload.doc.data());
     });
     
+    this.getAllRecent()
+  }
+
+  getAllRecent() {
+    const collection = this.afs.collection<any>('Articles', ref => ref
+      .orderBy('date','desc')
+      .limit(15));
+
+    collection.snapshotChanges(['added']).subscribe(items => {
+      this.articles.recent = items
+        .map(item => item.payload.doc.data());
+    });
   }
 
   showArticle(article) {
