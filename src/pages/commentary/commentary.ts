@@ -33,39 +33,33 @@ export class CommentaryPage {
       highlights: [],
       marketAndEconomy: []
     };
-    const getUpdates = this.afs.collection<any>('Articles', ref => { 
-      return ref.where('category', '==', 'Stock Market Today')
-                .orderBy('date','desc')
-                .limit(3);
-    }).valueChanges();
 
-    const getHighlights = this.afs.collection<any>('Articles', ref => { 
-      return ref.where('category', '==', 'Stock Highlights')
-                .orderBy('date','desc')
-                .limit(3);
-    }).valueChanges();
-
-    const getMarketAndEconomy = this.afs.collection<any>('Articles', ref => { 
-      return ref.where('category', '==', 'Market and Economy')
-                .orderBy('date','desc')
-                .limit(5);
-    }).valueChanges();
-
-    getUpdates.subscribe(items => items.forEach(item => {
+    const fixTitle = (item) => {
       const title = item.title.split(':')[1];
       item.title = title;
-      this.articles.updates.push(item);
-    }));
+      return item;
+    }
 
-    getHighlights.subscribe(items => items.forEach(item => {
-      const title = item.title.split(':')[1];
-      item.title = title;
-      this.articles.highlights.push(item);
-    }));
+    const getSubscription = (category, limit, callback) => {
+      this.afs.collection<any>('Articles', ref => ref
+          .where('category', '==', category)
+          .orderBy('date','desc')
+          .limit(limit))
+        .valueChanges().subscribe(callback);
+    }
 
-    getMarketAndEconomy.subscribe(items => items.forEach(item => {
-      this.articles.marketAndEconomy.push(item);
-    }));
+    getSubscription('Stock Market Today', 3, items => {
+      this.articles.updates = items.map(item => fixTitle(item));
+    });
+
+    getSubscription('Stock Highlights', 3, items => {
+      this.articles.highlights = items.map(item => fixTitle(item));
+    });
+    
+    getSubscription('Market and Economy', 5, items => {
+      this.articles.marketAndEconomy = items;
+    });
+    
   }
 
   showArticle(article) {
