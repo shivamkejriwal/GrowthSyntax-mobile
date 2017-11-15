@@ -77,8 +77,7 @@ export class MarketPage {
       const collection = this.afs
       .collection<any>('Companies', ref => { 
         return ref.where(key, '==', true);
-      });//.valueChanges();
-      collection.snapshotChanges(['added']).subscribe(callback);
+      }).snapshotChanges(['added']).subscribe(callback);
     }
       
     const pushValue = (items, array) => items.forEach(item => {
