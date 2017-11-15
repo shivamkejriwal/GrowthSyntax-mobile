@@ -3,7 +3,11 @@ page-market {
         height:100%;
     }
 
-    // .list-header-md {
-    //     border-top: none;
-    // }
+    .sectors .col{
+        padding: 0 5px;
+    }
+
+    .sectors .item-inner {
+        height: 45px;
+    }
 }
