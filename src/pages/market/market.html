@@ -24,8 +24,8 @@
     </ion-segment>
   </div>
 
-  <div [ngSwitch]="trades">
-    <ion-list *ngSwitchCase="'gainers'">
+  <div class="trades" [ngSwitch]="trades">
+    <ion-list *ngSwitchCase="'gainers'" no-lines>
         <ion-list-header mode="ios">
           <ion-row>
             <ion-col align="center" left>Ticker</ion-col>
@@ -42,7 +42,7 @@
         </ion-item>
     </ion-list>
 
-    <ion-list *ngSwitchCase="'losers'">
+    <ion-list *ngSwitchCase="'losers'" no-lines>
       <ion-list-header mode="ios">
         <ion-row>
           <ion-col align="center" left>Ticker</ion-col>
@@ -59,7 +59,7 @@
       </ion-item>
     </ion-list>
 
-    <ion-list *ngSwitchCase="'active'">
+    <ion-list *ngSwitchCase="'active'" no-lines>
       <ion-list-header mode="ios">
         <ion-row>
           <ion-col align="center" left>Ticker</ion-col>
