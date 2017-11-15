@@ -72,24 +72,25 @@ export class MarketPage {
   }
 
   loadDailyData = () => {
-    const createSubscription = (key) => this.afs
+
+    const createSubscription = (key, callback) => {
+      const collection = this.afs
       .collection<any>('Companies', ref => { 
         return ref.where(key, '==', true);
-      }).valueChanges();
+      });//.valueChanges();
+      collection.snapshotChanges(['added']).subscribe(callback);
+    }
       
     const pushValue = (items, array) => items.forEach(item => {
-      const change = Utils.round(((item.close - item.open)/item.open) * 100, 2);
-      item.change = change;
-      array.push(item)
+      const data = item.payload.doc.data();
+      const change = Utils.round(((data.close - data.open)/data.open) * 100, 2);
+      data.change = change;
+      array.push(data);
     });
 
-    const getMostBought = createSubscription('mostBought');
-    const getMostSold = createSubscription('mostSold');
-    const getMostTraded = createSubscription('mostTraded');
-
-    getMostBought.subscribe(items => pushValue(items, this.dailyData.mostBought));
-    getMostSold.subscribe(items => pushValue(items, this.dailyData.mostSold));
-    getMostTraded.subscribe(items => pushValue(items, this.dailyData.mostTraded));
+    createSubscription('mostBought', items => pushValue(items, this.dailyData.mostBought));
+    createSubscription('mostSold', items => pushValue(items, this.dailyData.mostSold));
+    createSubscription('mostTraded', items => pushValue(items, this.dailyData.mostTraded));
 
   }
 
