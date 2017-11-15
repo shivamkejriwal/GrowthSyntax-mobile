@@ -28,16 +28,16 @@
     <ion-list *ngSwitchCase="'gainers'">
         <ion-list-header mode="ios">
           <ion-row>
-            <ion-col left>Ticker</ion-col>
-            <ion-col center>Close</ion-col>
-            <ion-col right>Change</ion-col>
+            <ion-col align="center" left>Ticker</ion-col>
+            <ion-col align="center" center>Close</ion-col>
+            <ion-col align="center" right>Change</ion-col>
           </ion-row>  
         </ion-list-header>
         <ion-item *ngFor="let data of dailyData.mostBought" (click)="loadCompany(data.ticker)">
             <ion-row>
-              <ion-col left>{{data.ticker}}</ion-col>
-              <ion-col center>{{data.close}}</ion-col>
-              <ion-col right>{{data.change}}%</ion-col>
+              <ion-col align="center" left>{{data.ticker}}</ion-col>
+              <ion-col align="center" center>{{data.close}}</ion-col>
+              <ion-col align="center" right>{{data.change}}%</ion-col>
             </ion-row> 
         </ion-item>
     </ion-list>
@@ -45,16 +45,16 @@
     <ion-list *ngSwitchCase="'losers'">
       <ion-list-header mode="ios">
         <ion-row>
-          <ion-col left>Ticker</ion-col>
-          <ion-col center>Close</ion-col>
-          <ion-col right>Change</ion-col>
+          <ion-col align="center" left>Ticker</ion-col>
+          <ion-col align="center" center>Close</ion-col>
+          <ion-col align="center" right>Change</ion-col>
         </ion-row>  
       </ion-list-header> 
       <ion-item *ngFor="let data of dailyData.mostSold" (click)="loadCompany(data.ticker)">
           <ion-row>
-            <ion-col left>{{data.ticker}}</ion-col>
-            <ion-col center>{{data.close}}</ion-col>
-            <ion-col right>{{data.change}}%</ion-col>
+            <ion-col align="center" left>{{data.ticker}}</ion-col>
+            <ion-col align="center" center>{{data.close}}</ion-col>
+            <ion-col align="center" right>{{data.change}}%</ion-col>
           </ion-row> 
       </ion-item>
     </ion-list>
@@ -62,16 +62,16 @@
     <ion-list *ngSwitchCase="'active'">
       <ion-list-header mode="ios">
         <ion-row>
-          <ion-col left>Ticker</ion-col>
-          <ion-col center>Close</ion-col>
-          <ion-col right>Change</ion-col>
+          <ion-col align="center" left>Ticker</ion-col>
+          <ion-col align="center" center>Close</ion-col>
+          <ion-col align="center" right>Change</ion-col>
         </ion-row>  
       </ion-list-header>
       <ion-item *ngFor="let data of dailyData.mostTraded" (click)="loadCompany(data.ticker)">
           <ion-row>
-            <ion-col left>{{data.ticker}}</ion-col>
-            <ion-col center>{{data.close}}</ion-col>
-            <ion-col right>{{data.change}}%</ion-col>
+            <ion-col align="center" left>{{data.ticker}}</ion-col>
+            <ion-col align="center" center>{{data.close}}</ion-col>
+            <ion-col align="center" right>{{data.change}}%</ion-col>
           </ion-row>   
       </ion-item>
     </ion-list>
