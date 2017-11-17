@@ -32,6 +32,8 @@ import { DividendSection } from '../sections/dividend-section/dividend-section';
 import { ManagementSection } from '../sections/management-section/management-section';
 import { PerformanceSection } from '../sections/performance-section/performance-section';
 import { IntroSection } from '../sections/intro-section/intro-section';
+import { SectorsSection } from '../sections/sectors-section/sectors-section';
+import { IndustrySection } from '../sections/industry-section/industry-section';
 
 var firebaseConfig = {
   apiKey: "AIzaSyANdvBeknttAYM332pxDOIi9DYs7vNfm_w",
@@ -59,7 +61,9 @@ var firebaseConfig = {
     DividendSection,
     ManagementSection,
     PerformanceSection,
-    IntroSection
+    IntroSection,
+    SectorsSection,
+    IndustrySection
   ],
   imports: [
     BrowserModule,
@@ -80,6 +84,7 @@ var firebaseConfig = {
     CompanyPage,
     ArticlePage,
     LoginPage,
+    IndustrySection,
     TabsPage
   ],
   providers: [

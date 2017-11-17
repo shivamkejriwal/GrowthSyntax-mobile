@@ -1,0 +1,16 @@
+<div *ngIf="isReady" class="sectors" padding>
+    <ion-list no-lines>
+        <ion-list-header  mode="ios">
+        Sectors
+        </ion-list-header>
+        <ion-item *ngFor="let sector of sectors" align-items-center>
+            <ion-row align-items-center>
+                <ion-col>
+                    <ion-icon name="{{sector.icon}}" item-start></ion-icon>
+                    {{sector.name}}   
+                </ion-col>
+                <ion-col align="right"> {{sector.change}}%</ion-col>
+            </ion-row>
+        </ion-item>
+    </ion-list>
+</div>

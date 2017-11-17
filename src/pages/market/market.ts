@@ -6,7 +6,8 @@ import { AngularFirestore } from 'angularfire2/firestore';
 import { Utils } from '../../sections/utils';
 
 import { LoginPage } from '../login/login';
-
+import { IndustrySection } from '../../sections/industry-section/industry-section';
+ 
 const feedComplete = (dataFeed, callback, done) => {
   if (!done) {
     dataFeed.subscribe(data => callback(data))
@@ -58,6 +59,10 @@ export class MarketPage {
 
   goToProfile() {
     this.navCtrl.push(LoginPage);
+  }
+
+  goToIndustry() {
+    this.navCtrl.push(IndustrySection);
   }
 
   reset() {

@@ -78,119 +78,14 @@
 
   </div>
 
-  <div class="sectors" padding>
-    <ion-list no-lines>
-      <ion-list-header  mode="ios">
-        Sectors
-      </ion-list-header>
-      <ion-item>
-        <ion-row align-items-center>
-          <ion-col>
-              <ion-icon name="cog" item-start></ion-icon>
-              Basic Industries   
-          </ion-col>
-          <ion-col align="right"> 5%</ion-col>
-        </ion-row>
-      </ion-item>
-      <ion-item>
-        <ion-row align-items-center>
-          <ion-col>
-              <ion-icon name="stats" item-start></ion-icon>
-              Finance 
-          </ion-col>
-          <ion-col align="right"> 5%</ion-col>
-        </ion-row>
-      </ion-item>
-      <ion-item>
-        <ion-row align-items-center>
-          <ion-col>
-              <ion-icon name="construct" item-start></ion-icon>
-              Capital Goods 
-          </ion-col>
-          <ion-col align="right"> 5%</ion-col>
-        </ion-row>
-      </ion-item>
-      <ion-item>
-        <ion-row align-items-center>
-          <ion-col>
-              <ion-icon name="medkit" item-start></ion-icon>
-              Healthcare 
-          </ion-col>
-          <ion-col align="right"> 5%</ion-col>
-        </ion-row>
-      </ion-item>
-      <ion-item>
-        <ion-row align-items-center>
-          <ion-col>
-              <ion-icon name="cart" item-start></ion-icon>
-              Consumer Durables 
-          </ion-col>
-          <ion-col align="right"> 5%</ion-col>
-        </ion-row>
-      </ion-item>
-      <ion-item>
-        <ion-row align-items-center>
-          <ion-col>
-              <ion-icon name="basket" item-start></ion-icon>
-              Miscellaneous 
-          </ion-col>
-          <ion-col align="right"> 5%</ion-col>
-        </ion-row>
-      </ion-item>
-      <ion-item>
-        <ion-row align-items-center>
-          <ion-col>
-              <ion-icon name="pricetags" item-start></ion-icon>
-              Consumer Non-Durables 
-          </ion-col>
-          <ion-col align="right"> 5%</ion-col>
-        </ion-row>
-      </ion-item>
-      <ion-item>
-        <ion-row align-items-center>
-          <ion-col>
-              <ion-icon name="bulb" item-start></ion-icon>
-              Public Utilities
-          </ion-col>
-          <ion-col align="right"> 5%</ion-col>
-        </ion-row>
-      </ion-item>
-      <ion-item>
-        <ion-row align-items-center>
-          <ion-col>
-              <ion-icon name="contacts" item-start></ion-icon>
-              Consumer Services
-          </ion-col>
-          <ion-col align="right"> 5%</ion-col>
-        </ion-row>
-      </ion-item>
-      <ion-item>
-        <ion-row align-items-center>
-          <ion-col>
-              <ion-icon name="battery-charging" item-start></ion-icon>
-              Technology
-          </ion-col>
-          <ion-col align="right"> 5%</ion-col>
-        </ion-row>
-      </ion-item>
-      <ion-item>
-        <ion-row align-items-center>
-          <ion-col>
-              <ion-icon name="flame" item-start></ion-icon>
-              Energy
-          </ion-col>
-          <ion-col align="right"> 5%</ion-col>
-        </ion-row>
-      </ion-item>
-      <ion-item>
-        <ion-row align-items-center>
-          <ion-col>
-              <ion-icon name="subway" item-start></ion-icon>
-              Transportation
-          </ion-col>
-          <ion-col align="right"> 5%</ion-col>
-        </ion-row>
-      </ion-item>
-    </ion-list>
-  </div>
+  <sectors-section></sectors-section>
+  <ion-row>
+    <ion-col align="center">
+        <button ion-button clear icon-left (click)="goToIndustry()">
+          <ion-icon name="information-circle"></ion-icon>
+          Industry Details
+        </button>
+    </ion-col>
+  </ion-row>
+  
 </ion-content>
