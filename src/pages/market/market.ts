@@ -37,6 +37,7 @@ export class MarketPage {
   user: any;
   dailyData:any = {};
   trades: string = 'gainers';
+  marketMovement: any = {};
   
   
   constructor(public navCtrl: NavController, 
@@ -54,6 +55,11 @@ export class MarketPage {
       // this.navCtrl.popToRoot().then(() => this.loadCompany(ticker));
       // this.loadCompany(ticker);
     });
+    this.marketMovement = {
+      advancers: 2500,
+      decliners: 3000,
+      total: 5500
+    }
     
   }
 
