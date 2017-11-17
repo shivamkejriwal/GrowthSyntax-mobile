@@ -61,7 +61,13 @@
         <div *ngSwitchCase="'recent'">
             <ion-list>
                 <ion-item *ngFor="let article of articles.recent" (click)="showArticle(article)">
-                    {{article.title}}
+                    <ion-avatar item-start>
+                        <img *ngIf="article.imageUrl" src="{{article.imageUrl}}">
+                    </ion-avatar>
+                    <h2>{{article.title}}</h2>
+                    <p>{{article.category}}</p>
+                    <p class="author">{{article.author}}</p>
+                    <ion-note item-end>{{getTime(article.date)}}</ion-note>
                 </ion-item>
             </ion-list>
         </div>

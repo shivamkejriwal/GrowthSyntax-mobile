@@ -90,6 +90,26 @@ export class CommentaryPage {
     this.navCtrl.push(ArticlePage, {article});
   }
 
+  getTime(pubDate) {
+    const split = pubDate.split('-');
+    const publication = {
+      year: parseInt(split[0]),
+      month: parseInt(split[1]),
+      day: parseInt(split[2]),
+      hour: parseInt(split[3])
+    };
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = today.getMonth();
+    const day = today.getDate();
+    const hour = today.getHours();
+    if(year > publication.year) return `${year-publication.year} years ago`;
+    else if(month > publication.month) return `${month-publication.month} months ago`;
+    else if(day > publication.day) return `${day-publication.day} days ago`;
+    else if(hour > publication.hour) return `${hour-publication.hour} hours ago`;
+    else return `${split[0]}-${split[1]}-${split[2]}`;
+  }
+
   ionViewDidEnter() {
     this.menuCtrl.enable(false,'sidemenu');
   }
