@@ -83,7 +83,6 @@
         </host>
     </universal-links>
     <engine name="browser" spec="5.0.1" />
-    <engine name="ios" spec="4.5.3" />
     <plugin name="cordova-plugin-firebase" spec="^0.1.24" />
     <plugin name="cordova-plugin-browsertab" spec="^0.2.0" />
     <plugin name="ionic-plugin-keyboard" spec="^2.2.1" />
