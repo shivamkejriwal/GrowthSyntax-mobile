@@ -17,7 +17,11 @@
                         <ion-icon name="{{industry.icon}}" item-start></ion-icon>
                         {{industry.name}}   
                     </ion-col>
-                    <ion-col align="right"> {{industry.change}}%</ion-col>
+                    <ion-col align="right">
+                        <span class="{{industry.color}}">
+                            {{industry.change}}%
+                        </span>
+                    </ion-col>
                 </ion-row>
             </ion-item>
         </ion-list>

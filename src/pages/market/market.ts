@@ -95,6 +95,7 @@ export class MarketPage {
       const data = item.payload.doc.data();
       const change = Utils.round(((data.close - data.open)/data.open) * 100, 2);
       data.change = change;
+      data.color = data.close > data.open ? 'green' : 'red';
       array.push(data);
     });
 

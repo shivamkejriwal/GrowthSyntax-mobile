@@ -161,6 +161,7 @@ export class IndustrySection {
                 const data = item.payload.doc.data();
                 data.icon = this.getIcon(data.name);
                 data.change = Utils.round(data.change/data.open * 100, 2);
+                data.color = data.close > data.open ? 'green' : 'red';
                 // console.log(data);
                 return data;
             });

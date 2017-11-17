@@ -37,7 +37,11 @@
             <ion-row>
               <ion-col align="center" left>{{data.ticker}}</ion-col>
               <ion-col align="center" center>{{data.close}}</ion-col>
-              <ion-col align="center" right>{{data.change}}%</ion-col>
+              <ion-col align="center" right>
+                  <span class="{{data.color}}">
+                      {{data.change}}%
+                  </span>
+              </ion-col>
             </ion-row> 
         </ion-item>
     </ion-list>
@@ -54,7 +58,11 @@
           <ion-row>
             <ion-col align="center" left>{{data.ticker}}</ion-col>
             <ion-col align="center" center>{{data.close}}</ion-col>
-            <ion-col align="center" right>{{data.change}}%</ion-col>
+            <ion-col align="center" right>
+                <span class="{{data.color}}">
+                    {{data.change}}%
+                </span>
+            </ion-col>
           </ion-row> 
       </ion-item>
     </ion-list>
@@ -71,7 +79,11 @@
           <ion-row>
             <ion-col align="center" left>{{data.ticker}}</ion-col>
             <ion-col align="center" center>{{data.close}}</ion-col>
-            <ion-col align="center" right>{{data.change}}%</ion-col>
+            <ion-col align="center" right>
+                <span class="{{data.color}}">
+                    {{data.change}}%
+                </span>
+            </ion-col>
           </ion-row>   
       </ion-item>
     </ion-list>
