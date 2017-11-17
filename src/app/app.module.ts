@@ -34,6 +34,7 @@ import { PerformanceSection } from '../sections/performance-section/performance-
 import { IntroSection } from '../sections/intro-section/intro-section';
 import { SectorsSection } from '../sections/sectors-section/sectors-section';
 import { IndustrySection } from '../sections/industry-section/industry-section';
+import { MarketMovementSection } from '../sections/market-movement-section/market-movement-section';
 
 var firebaseConfig = {
   apiKey: "AIzaSyANdvBeknttAYM332pxDOIi9DYs7vNfm_w",
@@ -63,7 +64,8 @@ var firebaseConfig = {
     PerformanceSection,
     IntroSection,
     SectorsSection,
-    IndustrySection
+    IndustrySection,
+    MarketMovementSection
   ],
   imports: [
     BrowserModule,

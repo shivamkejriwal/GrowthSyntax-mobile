@@ -1,0 +1,18 @@
+<div class="market-movement">
+    <ion-row>
+        <ion-col align="left">
+            <ion-note color="danger" item-start>Decliners: {{marketMovement.decliners}}</ion-note>
+        </ion-col>
+        <ion-col align="right">
+            <ion-note color="secondary" item-end>Advancers: {{marketMovement.advancers}}</ion-note>
+        </ion-col>
+    </ion-row>
+    <ion-range color="danger" mode="wp" min="0" max="{{marketMovement.total}}" [disabled]="true" [(ngModel)]="marketMovement.decliners">
+        <ion-label color="danger" range-left>
+            <ion-icon name="trending-down"></ion-icon>
+        </ion-label>
+        <ion-label color="secondary" range-right>
+            <ion-icon name="trending-up"></ion-icon>
+        </ion-label>
+    </ion-range>
+</div>
