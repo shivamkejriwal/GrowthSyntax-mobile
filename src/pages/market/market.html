@@ -25,7 +25,7 @@
     </ion-segment>
   </div>
 
-  <div class="trades" [ngSwitch]="trades">
+  <div class="trades" [ngSwitch]="trades" (swipe)="swipeEvent($event)">
     <ion-list *ngSwitchCase="'gainers'" no-lines>
         <ion-list-header mode="ios">
           <ion-row>

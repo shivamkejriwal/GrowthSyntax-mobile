@@ -118,6 +118,21 @@ export class MarketPage {
     });
   }
 
+  swipeEvent(e) {
+    const sequence = ['gainers', 'losers', 'active'];
+    const direction = Utils.getDirection(e);
+    const current = sequence.indexOf(this.trades);
+    const getNext = (i) => (i < 0) ?  0: (i > 2) ?  2 : i;
+    
+    if ( direction=== 'right') {
+      this.trades = sequence[getNext(current - 1)];
+    }
+    if (direction === 'left') {
+      this.trades = sequence[getNext(current + 1)];
+    }
+    console.log('swipeEvent', direction);
+  }
+
   ionViewDidEnter() {
     this.menuCtrl.enable(true,'sidemenu');
   }
