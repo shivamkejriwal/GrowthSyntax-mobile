@@ -37,37 +37,37 @@ export class CommentaryPage {
       recent: []
     };
 
-    const fixTitle = (item) => {
-      const title = item.title.split(':')[1];
-      item.title = title;
-      return item;
+    const fixArticleData = (article, fixTitle) => {
+      if(fixTitle) {
+        const title = article.title.split(':')[1];
+        article.title = title;
+      }
+      article.timeSince = this.getTime(article.date);
+      article.avatar = this.getAvatar(article.author);
+      return article;
     }
 
-    const getSubscription = (category, limit, type, callback) => {
+    const getSubscription = (category, limit, callback) => {
       const collection = this.afs.collection<any>('Articles', ref => ref
           .where('category', '==', category)
           .orderBy('date','desc')
           .limit(limit));
-      if (type === 'values') {
-        collection.valueChanges().subscribe(callback);
-      } else {
-        collection.snapshotChanges(['added']).subscribe(callback);
-      }
+      collection.snapshotChanges(['added']).subscribe(callback);
     }
 
-    getSubscription('Stock Market Today', 3, 'snapshot', items => {
+    getSubscription('Stock Market Today', 3, items => {
       this.articles.updates = items
-        .map(item => fixTitle(item.payload.doc.data()));
+        .map(item => fixArticleData(item.payload.doc.data(), true));
     });
 
-    getSubscription('Stock Highlights', 3, 'snapshot', items => {
+    getSubscription('Stock Highlights', 3, items => {
       this.articles.highlights = items
-        .map(item => fixTitle(item.payload.doc.data()));
+        .map(item => fixArticleData(item.payload.doc.data(), true));
     });
     
-    getSubscription('Market and Economy', 5, 'snapshot', items => {
+    getSubscription('Market and Economy', 5, items => {
       this.articles.marketAndEconomy = items
-        .map(item => item.payload.doc.data());
+        .map(item => fixArticleData(item.payload.doc.data(), false));
     });
     
     this.getAllRecent()
@@ -80,14 +80,30 @@ export class CommentaryPage {
 
     collection.snapshotChanges(['added']).subscribe(items => {
       this.articles.recent = items
-        .map(item => item.payload.doc.data());
+        .map(item => {
+          const article = item.payload.doc.data();
+          article.timeSince = this.getTime(article.date);
+          article.avatar = this.getAvatar(article.author);
+          return article;
+        });
     });
   }
 
   showArticle(article) {
     // console.log('articles',this.articles);
-    console.log('article',article);
+    // console.log('article',article);
     this.navCtrl.push(ArticlePage, {article});
+  }
+
+  getAvatar(author) {
+    const avatars = {
+      'vanguard.com': 'assets/imgs/vanguard.jpg',
+      'valueline.com': 'assets/imgs/valueline-withText.png',
+      'blackrock.com': 'assets/imgs/blackrock.jpg',
+      'bloomberg.com': 'assets/imgs/bloomberg.jpg',
+      'schwab.com': 'assets/imgs/CharlesSchwab.png'
+    }
+    return avatars[author] || '';
   }
 
   getTime(pubDate) {
