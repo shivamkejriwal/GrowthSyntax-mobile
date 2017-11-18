@@ -37,6 +37,7 @@ export class MarketPage {
   user: any;
   dailyData:any = {};
   trades: string = 'active';
+  // lastDataDate: string = '';
   
   constructor(public navCtrl: NavController, 
     public menuCtrl: MenuController, 
@@ -50,8 +51,6 @@ export class MarketPage {
     this.events.subscribe('loadCompany', ticker => {
       this.menuCtrl.close();
       this.loadCompany(ticker);
-      // this.navCtrl.popToRoot().then(() => this.loadCompany(ticker));
-      // this.loadCompany(ticker);
     });
     
   }
@@ -62,6 +61,14 @@ export class MarketPage {
 
   goToIndustry() {
     this.navCtrl.push(IndustrySection);
+  }
+
+  get reportDate() {
+    const mostTraded = this.dailyData.mostTraded;
+    const dateString = mostTraded 
+              && mostTraded[0]
+              && mostTraded[0].date;
+    return dateString || '';
   }
 
   reset() {
@@ -95,7 +102,7 @@ export class MarketPage {
     createSubscription('mostBought', items => pushValue(items, this.dailyData.mostBought));
     createSubscription('mostSold', items => pushValue(items, this.dailyData.mostSold));
     createSubscription('mostTraded', items => pushValue(items, this.dailyData.mostTraded));
-
+    console.log(`reportDate: ${this.reportDate}`);
   }
 
   private loadCompany = (ticker) => {

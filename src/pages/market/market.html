@@ -15,6 +15,7 @@
 <ion-content padding>
     
   <h2 *ngIf="user.first">Welcome {{ user.first }}!</h2>
+  <ion-note *ngIf="reportDate">Market data for {{reportDate}}.</ion-note>
 
   <div padding>
     <ion-segment mode="ios" [(ngModel)]="trades">
