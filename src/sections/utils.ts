@@ -1,4 +1,19 @@
 
+const getDirection = (e) => {
+    const directionMap = {
+        1: 'none', 
+        2: 'left',
+        4: 'right',
+        8: 'up',
+        16: 'down',
+        6: 'horizontal',
+        24: 'vertical',
+        30: 'all'
+    }
+
+    return directionMap[e.direction];
+}
+
 const reduce = (list, key, alter) => {
     if (!list) return [];
     return list.reduce((prev, next) => {
@@ -131,6 +146,7 @@ const weightedAverage = (array, rawWeights) => {
 }
 
 const Utils = {
+    getDirection,
     reduce,
     getLastObject,
     getSecondLastObject,
