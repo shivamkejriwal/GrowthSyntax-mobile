@@ -3,7 +3,9 @@ import { NavController, MenuController } from 'ionic-angular';
 import { ArticlePage } from '../article/article';
 import { AngularFirestore } from 'angularfire2/firestore';
 
+import { Utils } from '../../sections/utils';
 import { LoginPage } from '../login/login';
+
 
 @Component({
   selector: 'page-commentary',
@@ -124,6 +126,17 @@ export class CommentaryPage {
     else if(day > publication.day) return `${day-publication.day} days ago`;
     else if(hour > publication.hour) return `${hour-publication.hour} hours ago`;
     else return `${split[0]}-${split[1]}-${split[2]}`;
+  }
+
+  swipeEvent(e) {
+    const direction = Utils.getDirection(e);
+    if ( direction=== 'right') {
+      this.type = 'topics'
+    }
+    if (direction === 'left') {
+      this.type = 'recent'
+    }
+    console.log('swipeEvent', direction);
   }
 
   ionViewDidEnter() {
