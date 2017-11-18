@@ -18,12 +18,15 @@ export class ArticlePage {
     console.log('ArticlePage', this.article);
   }
 
+  shareArticle() {
+    console.log('shareArticle')
+  }
+
   goToOriginalContent(link) {
     const url = link ? link : this.article.url;
     console.log('goToOriginalContent',{url});
     const isMac = this.platform.is('ios');
     const desktop = this.platform.is('core');
-    // window.open(url, '_blank');
     if (isMac || desktop) {
       window.open(url);
     }
