@@ -65,10 +65,6 @@ export class MyApp {
       this.getUserProfile(auth).then(profile => {
         this.rootPage = (profile) ? TabsPage : LoginPage;
         authSubscription.unsubscribe();
-        // if (profile) {
-        //   authSubscription.unsubscribe();
-        // }
-        console.log('MyApp-setupAuth', this.authState);
       })
     });
   }

@@ -7,27 +7,9 @@ import { Utils } from '../../sections/utils';
 
 import { LoginPage } from '../login/login';
 import { IndustrySection } from '../../sections/industry-section/industry-section';
- 
-const feedComplete = (dataFeed, callback, done) => {
-  if (!done) {
-    dataFeed.subscribe(data => callback(data))
-  }
-  else {
-    dataFeed.subscribe(data => callback(data, done))
-  }
-}
 
-const getDocument = (db: AngularFirestore, loc, callback, done) => {
-  const document = db.doc<any>(loc);
-  const dataFeed = document.valueChanges();
-  return feedComplete(dataFeed, callback, done);
-};
+import { AuthenticationService } from '../../services/authentication';
 
-const getCollection = (db: AngularFirestore,loc, callback, done) => {
-  const collection = db.collection<any>(loc);
-  const dataFeed = collection.valueChanges();
-  return feedComplete(dataFeed, callback, done);
-}
 
 @Component({
   selector: 'page-market',
@@ -37,21 +19,23 @@ export class MarketPage {
   user: any;
   dailyData:any = {};
   trades: string = 'active';
-  // lastDataDate: string = '';
   
   constructor(public navCtrl: NavController, 
     public menuCtrl: MenuController, 
     public events: Events, 
-    private afs: AngularFirestore) {
+    private afs: AngularFirestore,
+    private authService: AuthenticationService) {
     
     this.reset();
-    const userID = '000';
-    getDocument(afs, `Users/${userID}`, this.userProfileReceived, '');
     this.loadDailyData();
     this.events.subscribe('loadCompany', ticker => {
       this.menuCtrl.close();
       this.loadCompany(ticker);
     });
+
+    authService.loggedInUser()
+    .then(this.userProfileReceived)
+    .catch(err => console.log('authService', err));
     
   }
 

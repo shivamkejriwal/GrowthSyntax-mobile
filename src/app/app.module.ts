@@ -36,6 +36,8 @@ import { SectorsSection } from '../sections/sectors-section/sectors-section';
 import { IndustrySection } from '../sections/industry-section/industry-section';
 import { MarketMovementSection } from '../sections/market-movement-section/market-movement-section';
 
+import { AuthenticationService } from '../services/authentication';
+
 var firebaseConfig = {
   apiKey: "AIzaSyANdvBeknttAYM332pxDOIi9DYs7vNfm_w",
   authDomain: "growthsyntax.firebaseapp.com",
@@ -90,6 +92,7 @@ var firebaseConfig = {
     TabsPage
   ],
   providers: [
+    AuthenticationService,
     StatusBar,
     SplashScreen,
     BrowserTab,
