@@ -106,7 +106,8 @@ export class CommentaryPage {
       'valueline.com': 'assets/imgs/valueline-withText.png',
       'blackrock.com': 'assets/imgs/blackrock.jpg',
       'bloomberg.com': 'assets/imgs/bloomberg.jpg',
-      'schwab.com': 'assets/imgs/CharlesSchwab.png'
+      'schwab.com': 'assets/imgs/CharlesSchwab.png',
+      'pimco.com': 'assets/imgs/pimco.png'
     }
     return avatars[author] || '';
   }
