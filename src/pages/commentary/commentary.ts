@@ -84,6 +84,9 @@ export class CommentaryPage {
       this.articles.recent = items
         .map(item => {
           const article = item.payload.doc.data();
+          if(article.category === 'Stock Market Today') {
+            article.title = article.title.split(':')[1];
+          }
           article.timeSince = this.getTime(article.date);
           article.avatar = this.getAvatar(article.author);
           return article;
