@@ -126,7 +126,7 @@ export class VideosPage {
     }
 
     swipeEvent(e) {
-        const sequence = ['all', 'stocks', 'economy'];
+        const sequence = ['all', 'economy', 'stocks'];
         const direction = Utils.getDirection(e);
         const current = sequence.indexOf(this.type);
         const getNext = (i) => (i < 0) ?  0: (i > 2) ?  2 : i;
