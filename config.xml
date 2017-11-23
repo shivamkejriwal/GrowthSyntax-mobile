@@ -103,4 +103,5 @@
         <variable name="UPDATE_API" value="https://api.ionicjs.com" />
         <variable name="MAX_STORE" value="2" />
     </plugin>
+    <plugin name="cordova-plugin-youtube-video-player" spec="^1.0.6" />
 </widget>

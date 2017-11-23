@@ -1,0 +1,133 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>
+        Videos
+        </ion-title>
+        <ion-buttons end>
+        <button ion-button icon-only (click)="goToProfile()">
+            <ion-icon name="contact"></ion-icon>
+        </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+  
+<ion-content>
+
+    <div padding>
+        <ion-segment mode="ios" [(ngModel)]="type">
+            <ion-segment-button value="all"> All </ion-segment-button>
+            <ion-segment-button value="economy"> Economy </ion-segment-button>
+            <ion-segment-button value="stocks"> Stocks </ion-segment-button>
+        </ion-segment>
+    </div>
+    <div [ngSwitch]="type" (swipe)="swipeEvent($event)">
+        <div *ngSwitchCase="'all'">
+            <ion-list no-lines>
+                <ion-item *ngFor="let video of videos.all">
+                    <ion-card>
+                        <img *ngIf="video.thumbnail" [src]="video.thumbnail" alt=""/>
+                        <ion-card-content>
+                            <ion-card-title text-wrap>
+                                {{video.title}}
+                            </ion-card-title>
+                            <p>{{video.category}}</p>
+                            <p class="author">{{video.author}}</p>
+                            <ion-note>{{video.timeSince}}</ion-note>
+                        </ion-card-content>
+                        <!-- Card Footer -->
+                        <!-- =========== -->
+                        <ion-row no-padding>
+                            <ion-col>
+                                <button ion-button clear small color="danger" (click)="openVideoInApp(video)" icon-start>
+                                    <ion-icon name='logo-youtube'></ion-icon>
+                                    YouTube
+                                </button>
+                            </ion-col>
+                            <ion-col text-center></ion-col>
+                            <ion-col text-right>
+                                <button ion-button clear small color="danger" icon-start>
+                                    <ion-icon name='share-alt'></ion-icon>
+                                    Share
+                                </button>
+                            </ion-col>
+                        </ion-row>
+                    </ion-card>
+                </ion-item>
+            </ion-list>
+        </div>
+
+        <!-- Economy -->
+        <div *ngSwitchCase="'economy'">
+            <ion-list no-lines>
+                <ion-item *ngFor="let video of videos.economy">
+                    <ion-card>
+                        <img *ngIf="video.thumbnail" [src]="video.thumbnail" alt=""/>
+                        <ion-card-content>
+                            <ion-card-title text-wrap>
+                                {{video.title}}
+                            </ion-card-title>
+                            <p>{{video.category}}</p>
+                            <p class="author">{{video.author}}</p>
+                            <ion-note>{{video.timeSince}}</ion-note>
+                        </ion-card-content>
+                        <!-- Card Footer -->
+                        <!-- =========== -->
+                        <ion-row no-padding>
+                            <ion-col>
+                                <button ion-button clear small color="danger" (click)="openVideoInApp(video)" icon-start>
+                                    <ion-icon name='logo-youtube'></ion-icon>
+                                    YouTube
+                                </button>
+                            </ion-col>
+                            <ion-col text-center></ion-col>
+                            <ion-col text-right>
+                                <button ion-button clear small color="danger" icon-start>
+                                    <ion-icon name='share-alt'></ion-icon>
+                                    Share
+                                </button>
+                            </ion-col>
+                        </ion-row>
+                    </ion-card>
+                </ion-item>
+            </ion-list>
+        </div>
+
+        <!-- Stock -->
+        <div *ngSwitchCase="'stocks'">
+            <ion-list no-lines>
+                <ion-item *ngFor="let video of videos.stocks">
+                    <ion-card>
+                        <img *ngIf="video.thumbnail" [src]="video.thumbnail" alt=""/>
+                        <ion-card-content>
+                            <ion-card-title text-wrap>
+                                {{video.title}}
+                            </ion-card-title>
+                            <p>{{video.category}}</p>
+                            <p class="author">{{video.author}}</p>
+                            <ion-note>{{video.timeSince}}</ion-note>
+                        </ion-card-content>
+                        <!-- Card Footer -->
+                        <!-- =========== -->
+                        <ion-row no-padding>
+                            <ion-col>
+                                <button ion-button clear small color="danger" (click)="openVideoInApp(video)" icon-start>
+                                    <ion-icon name='logo-youtube'></ion-icon>
+                                    YouTube
+                                </button>
+                            </ion-col>
+                            <ion-col text-center></ion-col>
+                            <ion-col text-right>
+                                <button ion-button clear small color="danger" icon-start>
+                                    <ion-icon name='share-alt'></ion-icon>
+                                    Share
+                                </button>
+                            </ion-col>
+                        </ion-row>
+                    </ion-card>
+                </ion-item>
+            </ion-list>
+        </div>
+    </div>
+    
+</ion-content>
+  

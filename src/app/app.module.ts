@@ -2,6 +2,7 @@ import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserTab } from '@ionic-native/browser-tab';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { YoutubeVideoPlayer } from '@ionic-native/youtube-video-player';
 
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
@@ -13,6 +14,7 @@ import { CommentaryPage } from '../pages/commentary/commentary';
 import { CompanyPage } from '../pages/company/company';
 import { ArticlePage } from '../pages/article/article';
 import { LoginPage } from '../pages/login/login';
+import { VideosPage } from '../pages/videos/videos';
 import { TabsPage } from '../pages/tabs/tabs';
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -58,6 +60,7 @@ var firebaseConfig = {
     CompanyPage,
     ArticlePage,
     LoginPage,
+    VideosPage,
     TabsPage,
     ValueSection,
     HealthSection,
@@ -88,6 +91,7 @@ var firebaseConfig = {
     CompanyPage,
     ArticlePage,
     LoginPage,
+    VideosPage,
     IndustrySection,
     TabsPage
   ],
@@ -99,6 +103,7 @@ var firebaseConfig = {
     Firebase,
     AngularFireDatabase,
     InAppBrowser,
+    YoutubeVideoPlayer,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
